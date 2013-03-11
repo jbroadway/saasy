@@ -9,7 +9,7 @@ app_name = My SAAS App
 ; The URL to map to your app (e.g., 'myapp' if you want
 ; your app accessible at the URL /myapp).
 
-app_url = myapp
+app_alias = myapp
 
 ; A custom handler that generates your custom footer
 ; navigation links.

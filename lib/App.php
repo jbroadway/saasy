@@ -38,12 +38,12 @@ class App {
 		self::$controller = $controller;
 
 		$conf = self::conf ();
-		$app_url = $conf['App Settings']['app_url'];
+		$alias = $conf['App Settings']['app_alias'];
 
-		if ($_SERVER['REQUEST_URI'] === '/' . $app_url) {
+		if ($_SERVER['REQUEST_URI'] === '/' . $alias) {
 			$_SERVER['REQUEST_URI'] = '/saasy';
-		} elseif (strpos ($_SERVER['REQUEST_URI'], '/' . $app_url . '/') === 0) {
-			$_SERVER['REQUEST_URI'] = str_replace ('/' . $app_url . '/', '/saasy/', $_SERVER['REQUEST_URI']);
+		} elseif (strpos ($_SERVER['REQUEST_URI'], '/' . $alias . '/') === 0) {
+			$_SERVER['REQUEST_URI'] = str_replace ('/' . $alias . '/', '/saasy/', $_SERVER['REQUEST_URI']);
 		}
 
 		$page = $controller->page ();
@@ -63,7 +63,7 @@ class App {
 	 */
 	public static function href () {
 		$conf = self::conf ();
-		return '/' . $conf['App Settings']['app_url'];
+		return '/' . $conf['App Settings']['app_alias'];
 	}
 
 	/**
