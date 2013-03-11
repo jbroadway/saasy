@@ -22,6 +22,10 @@ class App {
 	public static function conf () {
 		if (self::$conf === null) {
 			self::$conf = parse_ini_file ('apps/saasy/conf/config.php', true);
+			if (file_exists ('conf/app.saasy.' . ELEFANT_ENV . '.php')) {
+				$conf2 = parse_ini_file ('conf/app.saasy.' . ELEFANT_ENV . '.php', true);
+				self::$conf = array_replace_recursive (self::$conf, $conf2);
+			}
 		}
 		return self::$conf;
 	}
