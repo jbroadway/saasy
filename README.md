@@ -25,6 +25,7 @@ Status: Alpha
 * Account levels and disabled accounts
 * Email templates for account management
 * Documentation/examples
+* See [jbroadway/saas](https://github.com/jbroadway/saas) for model ideas
 
 ## Customization
 
