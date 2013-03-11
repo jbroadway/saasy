@@ -53,7 +53,7 @@ bootstrap.php (copied from apps/saasy/sample_bootstrap.php)
 conf/
 	app.saasy.config.php (copied from apps/saasy/conf/config.php)
 layouts/
-	saasy.html 9copied from apps/saasy/saasy.html)
+	saasy.html (copied from apps/saasy/saasy.html)
 ```
 
 ### Adding sections to your SAAS app

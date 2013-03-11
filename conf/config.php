@@ -22,9 +22,7 @@ footer = Off
 theme = Off
 
 ; A custom handler that provides search capabilities
-; for your app. Your handler should accept a boolean
-; 'header' parameter that tells it to show only the
-; search form, for embedding in the header of the site.
+; for your app.
 
 search = Off
 

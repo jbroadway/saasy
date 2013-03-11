@@ -93,15 +93,24 @@ class App {
 	}
 
 	/**
+	 * Whether the app has search capabilities.
+	 */
+	public static function has_search () {
+		if (! \User::require_login ()) {
+			return false;
+		}
+
+		$conf = self::$conf;
+		return ($conf['App Settings']['search']) ? true : false;
+	}
+
+	/**
 	 * Add search to your app.
 	 */
 	public static function search () {
 		$conf = self::$conf;
 		if ($conf['App Settings']['search']) {
-			return self::$controller->run (
-				$conf['App Settings']['search'],
-				array ('header' => false)
-			);
+			return self::$controller->run ($conf['App Settings']['search']);
 		}
 		return '';
 	}
@@ -124,9 +133,13 @@ class App {
 	 * Generate the top-level menu for the sections of your app.
 	 */
 	public static function menu ($current = false) {
+		if (! \User::require_login ()) {
+			return '';
+		}
+
 		$conf = self::$conf;
 		if (! is_array ($conf['Sections'])) {
-			return '';
+			$conf['Sections'] = array ();
 		}
 
 		if (! $current) {
@@ -147,6 +160,25 @@ class App {
 				array_shift ($value)
 			);
 		}
+
+		// Add account
+		$class = (strpos ($_SERVER['REQUEST_URI'], '/saasy/account') === 0)
+			? ' class="active"'
+			: '';
+		$out .= sprintf (
+			'<li%s><a href="%s/%s">%s</a></li>',
+			$class,
+			self::href (),
+			'account',
+			__ ('Account')
+		);
+
+		// Add sign out
+		$out .= sprintf (
+			'<li><a href="/user/logout">%s</a></li>',
+			__ ('Sign Out')
+		);
+
 		return $out . '</ul>';
 	}
 
