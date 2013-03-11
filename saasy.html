@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{ saasy\App::name () }} - {{ window_title }}</title>
+	<meta charset="{{i18n.charset}}" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" media="screen" href="/apps/saasy/bootstrap/css/bootstrap.min.css" />
+	<style>
+		body { padding-top: 60px !important; }
+	</style>
+	<link rel="stylesheet" media="screen" href="/apps/saasy/bootstrap/css/bootstrap-responsive.min.css" />
+	{{ saasy\App::theme ()|none }}
+	{! admin/head !}
+	{{ head|none }}
+</head>
+<body>
+
+<div class="navbar navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container">
+			<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="brand" href="/">{{ saasy\Organization::header ()|none }}</a>
+			<div class="nav-collapse collapse">
+				{{ saasy\App::menu ()|none }}
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+<h1>{{ title|none }}</h1>
+
+{{ body|none }}
+</div>
+
+<footer class="footer">
+	<div class="container">
+		{{ saasy\App::footer ()|none }}
+	</div>
+</footer>
+
+{{ tail|none }}
+</body>
+</html>
