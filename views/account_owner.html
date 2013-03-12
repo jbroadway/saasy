@@ -1,0 +1,66 @@
+<form method="post" id="{{_form}}">
+<div class="row">
+	<div class="span6">
+
+<p>
+	<label>{"Your name"}</label>
+	<input type="text" name="name" value="{{ name|quotes }}" />
+</p>
+
+<p>
+	<label>{"Email address"}</label>
+	<input type="email" name="email" value="{{ email|quotes }}" />
+</p>
+
+<p>
+	<label>{"New password"}</label>
+	<input type="password" name="new_pass" value="{{ new_pass|quotes }}" />
+</p>
+
+<p>
+	<label>{"Verify password"}</label>
+	<input type="password" name="ver_pass" value="{{ ver_pass|quotes }}" />
+</p>
+
+	</div>
+	<div class="span6">
+
+<p>
+	<label>{"Organization name"}</label>
+	<input type="text" name="org_name" value="{{ org_name|quotes }}" />
+</p>
+
+<p>
+	<label>{"Organization logo (max 250w x 40h)"}</label><br />
+	<input type="file" name="org_logo" />
+</p>
+
+<p>
+	<label>{"Change your domain"}:</label>
+	<div class="input-append">
+		<input type="text" name="subdomain" id="subdomain" value="{{ subdomain|quotes }}" />
+		<span class="add-on">.{{ saasy\App::base_domain () }}</span>
+	</div>
+</p>
+
+<p><input type="submit" value="{"Update settings"}" /></p>
+
+	</div>
+</div>
+</form>
+
+<hr />
+
+<p style="float: right; margin-top: 18px;">
+	<a href="{{ saasy\App::href () }}/account/add">{"Add a member"}</a>
+</p>
+
+<h2>{"Members"}</h2>
+
+<p>...</p>
+
+<script>
+$(function () {
+	$(':file').filestyle ();
+});
+</script>
