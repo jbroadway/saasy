@@ -7,6 +7,9 @@
  * Elefant installation.
  */
 
+// Pre-initialize the cache
+$cache = Cache::init (conf ('Cache'));
+
 // Initialize the app
 saasy\App::bootstrap ($controller);
 

@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Installs the database schema.
+ */
+
 $this->require_admin ();
 
 $page->layout = 'admin';

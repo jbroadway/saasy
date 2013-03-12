@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Provides organization and account management.
+ */
+
 namespace saasy;
 
 if (! \User::require_login ()) {

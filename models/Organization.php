@@ -2,6 +2,9 @@
 
 namespace saasy;
 
+/**
+ * Contains the logic around managing organizations.
+ */
 class Organization extends \Model {
 	public $table = '#prefix#saasy_org';
 

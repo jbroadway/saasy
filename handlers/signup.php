@@ -1,7 +1,8 @@
 <?php
 
 /**
- * Default user sign up form.
+ * Custom user sign up form that also creates an initial
+ * organziation and owner account.
  */
 
 // Sign up at base domain
@@ -17,7 +18,7 @@ if ($org) {
 $form = new Form ('post', $this);
 $page->title = __ ('Sign Up');
 
-echo $form->handle (function ($form) use ($page) {
+echo $form->handle (function ($form) use ($page, $tpl) {
 	$date = gmdate ('Y-m-d H:i:s');
 	$verifier = md5 (uniqid (mt_rand (), 1));
 	$u = new User (array (

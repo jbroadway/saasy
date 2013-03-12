@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Provides the search interface.
+ */
+
 namespace saasy;
 
 if (! \User::require_login ()) {
