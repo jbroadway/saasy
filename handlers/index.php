@@ -7,19 +7,9 @@
 
 namespace saasy;
 
-// Send non-org requests to main site signup
-$org = App::org ();
-if (! $org) {
-	$this->redirect (
-		$this->is_https ()
-			? 'https://www.' . App::base_domain () . '/user/signup'
-			: 'http://www.' . App::base_domain () . '/user/signup'
-	);
-}
-
-if (! \User::require_login ()) {
-	$page->title = __ ('Members');
-	echo $this->run ('user/login');
+// Authorize user
+$res = App::authorize ($page, $tpl);
+if (! $res) {
 	return;
 }
 

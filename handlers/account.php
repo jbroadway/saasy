@@ -6,9 +6,9 @@
 
 namespace saasy;
 
-if (! \User::require_login ()) {
-	$page->title = __ ('Members');
-	echo $this->run ('user/login');
+// Authorize user
+$res = App::authorize ($page, $tpl);
+if (! $res) {
 	return;
 }
 

@@ -124,6 +124,40 @@ class App {
 	}
 
 	/**
+	 * Authorize the user to see the account, or take
+	 * appropriate action if they're not authorized.
+	 */
+	public static function authorize ($page, $tpl) {
+		// Send non-org requests to the main site signup
+		$org = self::org ();
+		if (! $org) {
+			self::$controller->redirect (
+				self::$controller->is_https ()
+					? 'https://www.' . self::base_domain () . '/user/signup'
+					: 'http://www.' . self::base_domain () . '/user/signup'
+			);
+		}
+
+		// Require user to be logged in
+		if (! \User::require_login ()) {
+			$page->title = __ ('Members');
+			echo self::$controller->run ('user/login');
+			return false;
+		}
+
+		// Does this user belong to the organization?
+		$acct = self::acct ();
+		if (! $acct || $acct->org !== $org->id) {
+			\User::logout ();
+			$page->title = __ ('Unauthorized');
+			echo $tpl->render ('saasy/unauthorized');
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
 	 * Get the app name.
 	 */
 	public static function name () {
