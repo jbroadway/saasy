@@ -3,7 +3,9 @@ create table #prefix#saasy_org (
 	name char(72) not null,
 	subdomain char(72) not null,
 	logo char(128) not null,
-	unique (subdomain)
+	status int not null,
+	unique (subdomain),
+	index (status)
 );
 
 create table #prefix#saasy_acct (

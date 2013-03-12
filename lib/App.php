@@ -17,6 +17,16 @@ class App {
 	public static $controller = null;
 
 	/**
+	 * The current organization.
+	 */
+	public static $org = null;
+
+	/**
+	 * The current user account.
+	 */
+	public static $acct = null;
+
+	/**
 	 * Returns the app configuration info.
 	 */
 	public static function conf () {
@@ -44,14 +54,73 @@ class App {
 		$conf = self::conf ();
 		$alias = $conf['App Settings']['app_alias'];
 
+		// Rewrite /app_alias/ to /saasy/
 		if ($_SERVER['REQUEST_URI'] === '/' . $alias) {
 			$_SERVER['REQUEST_URI'] = '/saasy';
 		} elseif (strpos ($_SERVER['REQUEST_URI'], '/' . $alias . '/') === 0) {
 			$_SERVER['REQUEST_URI'] = str_replace ('/' . $alias . '/', '/saasy/', $_SERVER['REQUEST_URI']);
 		}
 
+		// Add bootstrap.js
 		$page = $controller->page ();
 		$page->add_script ('/apps/saasy/bootstrap/js/bootstrap.min.js');
+		$page->add_script ('<script>$(function(){$("input[type=submit]").addClass("btn");});</script>');	
+
+		// Get the org from the subdomain
+		$parts = explode ('.', $_SERVER['HTTP_HOST']);
+		if (count ($parts) === 3) {
+			$sub = array_shift ($parts);
+			$org = Organization::query ()
+				->where ('subdomain', $sub)
+				->single ();
+
+			if ($org && ! $org->error) {
+				self::org ($org);
+
+				// Get the account from the user
+				if (\User::require_login ()) {
+					$acct = Account::query ()
+						->where ('user', \User::val ('id'))
+						->where ('org', $org->id)
+						->single ();
+
+					if ($acct && ! $acct->error) {
+						self::acct ($acct);
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * Get the domain minus any subdomain.
+	 */
+	public static function base_domain () {
+		$parts = explode ('.', $_SERVER['HTTP_HOST']);
+		if (count ($parts) === 3) {
+			array_shift ($parts);
+		}
+		return join ('.', $parts);
+	}
+
+	/**
+	 * Get/set the current organization.
+	 */
+	public static function org ($org = null) {
+		if ($org !== null) {
+			self::$org = $org;
+		}
+		return self::$org;
+	}
+
+	/**
+	 * Get/set the current user account.
+	 */
+	public static function acct ($acct = null) {
+		if ($acct !== null) {
+			self::$acct = $acct;
+		}
+		return self::$acct;
 	}
 
 	/**

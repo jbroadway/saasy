@@ -1,0 +1,54 @@
+<form method="POST" id="{{ _form }}">
+
+<p>{"Your name"}:<br /><input type="text" name="name" size="40" value="{{ name }}" />
+<span class="notice" id="name-notice">{"You must enter your name."}</span></p>
+
+<p>{"Email address"}:<br /><input type="text" name="email" size="40" value="{{ email }}" />
+<span class="notice" id="email-notice">{"You must enter a valid email, or your email may already be registered."}</span></p>
+
+<p>{"Choose a password"}:<br /><input type="password" name="password" size="20" value="{{ password }}" />
+<span class="notice" id="password-notice">{"Your password must be at least 6 characters."}</span></p>
+
+<p>{"Verify password"}:<br /><input type="password" name="verify_pass" size="20" value="{{ verify_pass }}" />
+<span class="notice" id="verify_pass-notice">{"Your password doesn't match."}</span></p>
+
+<hr />
+
+<p>
+	{"Organization name"}:<br />
+	<input type="text" name="org_name" id="org-name" size="40" value="{{ org_name }}" />
+	<span class="notice" id="org_name-notice">{"You must enter your organization name."}</span>
+</p>
+
+<p>
+	{"Choose a domain"}:<br />
+	<div class="input-append">
+		<input type="text" name="subdomain" id="subdomain" value="{{ subdomain }}" />
+		<span class="add-on">.{{ saasy\App::base_domain () }}</span>
+	</div>
+	<span class="notice" id="subdomain-notice">{"Please choose a unique domain for your organization."}</span>
+</p>
+
+<p><input type="submit" value="{"Sign Up"}" /></p>
+
+</form>
+
+<script>
+$(function () {
+	function update_subdomain () {
+		var sub = $('#subdomain'),
+			val = sub.val ();
+		
+		val = $(this).val ()
+			.toLowerCase ()
+			.trim ()
+			.replace (/[^a-z0-9-]+/g, '');
+
+		sub.val (val);
+	}
+
+	$('#org-name')
+		.keyup (update_subdomain)
+		.blur (update_subdomain);
+});
+</script>

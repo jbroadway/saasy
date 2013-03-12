@@ -36,6 +36,16 @@ search = Off
 ;
 ; clients[myapp/clients] = Clients
 
+[Emails]
+
+; The welcome email for new organizations
+
+welcome = saasy/email/welcome
+
+; The welcome email for new accounts within an organization
+
+new_account = saasy/email/new_account
+
 [Admin]
 
 handler = saasy/admin

@@ -2,10 +2,12 @@ create table #prefix#saasy_org (
 	id integer primary key,
 	name char(72) not null,
 	subdomain char(72) not null,
-	logo char(128) not null
+	logo char(128) not null,
+	status int not null
 );
 
 create unique index #prefix#saasy_org_subdomain on #prefix#saasy_org (subdomain);
+create index #prefix#saasy_org_status on #prefix#saasy_org (status);
 
 create table #prefix#saasy_acct (
 	id integer primary key,

@@ -10,6 +10,10 @@ if (! \User::require_login ()) {
 
 $page->title = __ ('Account');
 
-echo '<p>...</p>';
+echo $tpl->render (
+	'saasy/account',
+	array (
+	)
+);
 
 ?>
