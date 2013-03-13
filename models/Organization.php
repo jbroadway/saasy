@@ -57,7 +57,7 @@ class Organization extends \Model {
 	 * Returns a correctly sized logo if available. If not, returns false.
 	 */
 	public function logo ($width = 250, $height = 40) {
-		$files = glob ('cache/saasy/logos/' . $this->id . '.{jpg|png|gif}', GLOB_BRACE);
+		$files = glob ('cache/saasy/logos/' . $this->id . '.{jpg,png,gif}', GLOB_BRACE);
 		if (count ($files) > 0) {
 			$logo = array_shift ($files);
 			return '/' . \Image::resize ($logo, $width, $height, 'cover');
@@ -79,6 +79,16 @@ class Organization extends \Model {
 		if (! is_dir ('cache/saasy/logos')) {
 			mkdir ('cache/saasy/logos');
 			chmod ('cache/saasy/logos', 0777);
+		}
+
+		if (file_exists ('cache/saasy/logos/' . $this->id . '.jpg')) {
+			unlink ('cache/saasy/logos/' . $this->id . '.jpg');
+		}
+		if (file_exists ('cache/saasy/logos/' . $this->id . '.png')) {
+			unlink ('cache/saasy/logos/' . $this->id . '.png');
+		}
+		if (file_exists ('cache/saasy/logos/' . $this->id . '.gif')) {
+			unlink ('cache/saasy/logos/' . $this->id . '.gif');
 		}
 
 		if (! move_uploaded_file (

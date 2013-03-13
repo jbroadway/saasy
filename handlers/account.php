@@ -72,7 +72,7 @@ echo $form->handle (function ($form) use ($page, $org, $acct) {
 
 		// TODO: add notification for user
 
-		return false;
+		$form->controller->redirect (App::href () . '/account');
 	}
 });
 

@@ -33,7 +33,7 @@ class Account extends \Model {
 	 * If not, returns a default profile photo.
 	 */
 	public function photo ($width = 160, $height = 160) {
-		$files = glob ('cache/saasy/accounts/' . $this->id . '.{jpg|png|gif}', GLOB_BRACE);
+		$files = glob ('cache/saasy/accounts/' . $this->id . '.{jpg,png,gif}', GLOB_BRACE);
 		if (count ($files) > 0) {
 			$photo = array_shift ($files);
 			return '/' . \Image::resize ($photo, $width, $height, 'cover');
@@ -55,6 +55,16 @@ class Account extends \Model {
 		if (! is_dir ('cache/saasy/accounts')) {
 			mkdir ('cache/saasy/accounts');
 			chmod ('cache/saasy/accounts', 0777);
+		}
+
+		if (file_exists ('cache/saasy/accounts/' . $this->id . '.jpg')) {
+			unlink ('cache/saasy/accounts/' . $this->id . '.jpg');
+		}
+		if (file_exists ('cache/saasy/accounts/' . $this->id . '.png')) {
+			unlink ('cache/saasy/accounts/' . $this->id . '.png');
+		}
+		if (file_exists ('cache/saasy/accounts/' . $this->id . '.gif')) {
+			unlink ('cache/saasy/accounts/' . $this->id . '.gif');
 		}
 
 		if (! move_uploaded_file (
