@@ -38,7 +38,6 @@ echo $form->handle (function ($form) use ($page, $tpl) {
 		$org = new saasy\Organization (array (
 			'name' => $_POST['org_name'],
 			'subdomain' => $_POST['subdomain'],
-			'logo' => '',
 			'status' => 1
 		));
 		$org->put ();
@@ -46,7 +45,8 @@ echo $form->handle (function ($form) use ($page, $tpl) {
 		$acct = new saasy\Account (array (
 			'user' => $u->id,
 			'org' => $org->id,
-			'type' => 'owner'
+			'type' => 'owner',
+			'enabled' => 1
 		));
 		$acct->put ();
 

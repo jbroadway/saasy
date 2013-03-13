@@ -147,7 +147,7 @@ class App {
 
 		// Does this user belong to the organization?
 		$acct = self::acct ();
-		if (! $acct || $acct->org !== $org->id) {
+		if (! $acct || $acct->org !== $org->id || $acct->enabled == 0) {
 			\User::logout ();
 			$page->title = __ ('Unauthorized');
 			echo $tpl->render ('saasy/unauthorized');
