@@ -39,6 +39,9 @@ echo $form->handle (function ($form) use ($page, $org, $acct) {
 	// update user/acct
 	\User::val ('name', $_POST['name']);
 	\User::val ('email', $_POST['email']);
+	if (! empty ($_POST['new_pass'])) {
+		\User::val ('password', \User::encrypt_pass ($_POST['new_pass']));
+	}
 	\User::save ();
 
 	if (is_uploaded_file ($_FILES['photo']['tmp_name'])) {
@@ -48,11 +51,28 @@ echo $form->handle (function ($form) use ($page, $org, $acct) {
 	if ($acct->type === 'owner') {
 		// update org too
 		$org->name = $_POST['org_name'];
-		$org->subdomain = $_POST['subdomain'];
+		if ($org->subdomain !== $_POST['subdomain']) {
+			$org->subdomain = $_POST['subdomain'];
+			$domain_has_changed = true;
+		} else {
+			$domain_has_changed = false;
+		}
 
 		if (is_uploaded_file ($_FILES['org_logo']['tmp_name'])) {
 			$org->save_logo ($_FILES['org_logo']);
 		}
+
+		if ($domain_has_changed) {
+			$form->controller->redirect (
+				$form->controller->is_https ()
+					? 'https://' . $org->subdomain . '.' . App::base_domain () . '/'
+					: 'http://' . $org->subdomain . '.' . App::base_domain () . '/'
+			);
+		}
+
+		// TODO: add notification for user
+
+		return false;
 	}
 });
 
