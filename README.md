@@ -28,8 +28,14 @@ Status: Alpha
   * Remove members
   * Enable/disable members
 * Email templates for account management
-* Admin screen to show # of organizations and accounts
 * Documentation/examples
+
+## Future
+
+* Admin dashboard to show # of organizations and accounts
+* Drop menus in the navbar
+* Customizable theme colours
+* Billing management
 
 ## Customization
 
