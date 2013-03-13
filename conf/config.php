@@ -26,6 +26,11 @@ theme = Off
 
 search = Off
 
+; A static method to call for a list of access limits
+; for each account level.
+
+limits = Off
+
 [Sections]
 
 ; A list of sections for the app. These take the form:

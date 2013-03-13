@@ -38,7 +38,7 @@ echo $form->handle (function ($form) use ($page, $tpl) {
 		$org = new saasy\Organization (array (
 			'name' => $_POST['org_name'],
 			'subdomain' => $_POST['subdomain'],
-			'status' => 1
+			'level' => 1
 		));
 		$org->put ();
 

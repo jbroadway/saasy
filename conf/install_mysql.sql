@@ -2,9 +2,9 @@ create table #prefix#saasy_org (
 	id int not null auto_increment primary key,
 	name char(72) not null,
 	subdomain char(72) not null,
-	status int not null,
+	level int not null,
 	unique (subdomain),
-	index (status)
+	index (level)
 );
 
 create table #prefix#saasy_acct (

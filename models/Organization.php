@@ -10,11 +10,13 @@ namespace saasy;
  * - id - Auto-incrementing ID for each organzation row
  * - name - Organization name
  * - subdomain - Subdomain to link to this organization
- * - status - Status of the organization
+ * - level - Account level of the organization
  *
  * Subdomains must be unique, and cannot be 'www'.
  *
- * Status may be used to enable/disable features for an organization.
+ * Level may be used to enable/disable features for an organization
+ * through the 'limits' setting. Note that level=0 implies a disabled
+ * account.
  */
 class Organization extends \Model {
 	public $table = '#prefix#saasy_org';

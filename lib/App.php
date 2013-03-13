@@ -27,6 +27,11 @@ class App {
 	public static $acct = null;
 
 	/**
+	 * The account limits.
+	 */
+	public static $limits = null;
+
+	/**
 	 * Returns the app configuration info.
 	 */
 	public static function conf () {
@@ -296,6 +301,47 @@ class App {
 		
 		$keys = array_keys ($conf['Sections']);
 		return array_shift ($keys);
+	}
+
+	/**
+	 * Get the account limits for all or a specific level.
+	 * Calls the method in [App Settings][limit] for a list
+	 * of limits, which should return an array such as:
+	 *
+	 *     array (
+	 *         1 => array (
+	 *             'name' => __ ('Free'),
+	 *             'members' => 0 // no sub-accounts
+	 *         ),
+	 *         2 => array (
+	 *             'name' => __ ('Basic'),
+	 *             'members' => 10 // 10 sub-accounts
+	 *         ),
+	 *         3 => array (
+	 *             'name' => __ ('Pro'),
+	 *             'members' => -1 // unlimited sub-accounts
+	 *         )
+	 *     );
+	 *
+	 * Note: Level 0 implies a disabled account.
+	 */
+	public static function limits ($level = null) {
+		if (self::$limits === null) {
+			$conf = self::$conf;
+			if ($conf['App Settings']['limits']) {
+				self::$limits = call_user_func ($conf['App Settings']['limits']);
+			} else {
+				self::$limits = array ();
+			}
+		}
+
+		if ($level !== null) {
+			if (isset (self::$limits[$level])) {
+				return self::$limits[$level];
+			}
+			return array ();
+		}
+		return self::$limits;
 	}
 }
 

@@ -1,1 +1,38 @@
-<p>...</p>
+<form method="post" id="{{_form}}" enctype="multipart/form-data">
+<div class="row">
+	<div class="span6">
+
+<p>
+	<label>{"Your name"}</label>
+	<input type="text" name="name" value="{{ name|quotes }}" />
+</p>
+
+<p>
+	<label>{"Email address"}</label>
+	<input type="email" name="email" value="{{ email|quotes }}" autocomplete="off" />
+</p>
+
+<p>
+	<label>{"New password"}</label>
+	<input type="password" name="new_pass" value="{{ new_pass|quotes }}" autocomplete="off" />
+</p>
+
+<p>
+	<label>{"Verify password"}</label>
+	<input type="password" name="ver_pass" value="{{ ver_pass|quotes }}" autocomplete="off" />
+</p>
+
+	</div>
+	<div class="span6">
+
+<p>
+	<label>{"Profile photo (160x160)"}</label><br />
+	<img src="{{photo}}" width="160" height="160" style="padding-bottom: 5px" /><br />
+	<input type="file" name="photo" />
+</p>
+
+<p><br /><input type="submit" value="{"Update settings"}" /></p>
+
+	</div>
+</div>
+</form>

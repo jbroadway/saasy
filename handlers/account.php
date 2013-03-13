@@ -17,12 +17,15 @@ $page->title = __ ('Account');
 $form = new \Form ('post', $this);
 
 $org = App::org ();
+$acct = App::acct ();
 
 $form->data = array (
 	'name' => \User::val ('name'),
 	'email' => \User::val ('email'),
+	'photo' => $acct->photo (),
 	'org_name' => $org->name,
-	'subdomain' => $org->subdomain
+	'subdomain' => $org->subdomain,
+	'org_logo' => $org->logo ()
 );
 
 $acct = App::acct ();
