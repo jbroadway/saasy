@@ -21,11 +21,15 @@ Status: Alpha
 
 ## To do
 
-* Account management (add members to an organization)
-* Account levels and disabled accounts
+* Account management
+  * Save changes
+  * Upload photos
+  * Add members
+  * Remove members
+  * Enable/disable members
 * Email templates for account management
+* Admin screen to show # of organizations and accounts
 * Documentation/examples
-* See [jbroadway/saas](https://github.com/jbroadway/saas) for model ideas
 
 ## Customization
 

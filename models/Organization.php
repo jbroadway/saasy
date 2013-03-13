@@ -64,6 +64,32 @@ class Organization extends \Model {
 		}
 		return false;
 	}
+
+	/**
+	 * Save a new logo image.
+	 */
+	public function save_logo ($upload) {
+		$ext = strtolower (pathinfo ($upload['name'], PATHINFO_EXTENSION));
+
+		if (! is_dir ('cache/saasy')) {
+			mkdir ('cache/saasy');
+			chmod ('cache/saasy', 0777);
+		}
+
+		if (! is_dir ('cache/saasy/logos')) {
+			mkdir ('cache/saasy/logos');
+			chmod ('cache/saasy/logos', 0777);
+		}
+
+		if (! move_uploaded_file (
+			$upload['tmp_name'],
+			'cache/saasy/logos/' . $this->id . '.' . $ext
+		)) {
+			return false;
+		}
+		chmod ('cache/saasy/logos/' . $this->id . '.' . $ext, 0666);
+		return true;
+	}
 }
 
 ?>

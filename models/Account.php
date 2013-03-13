@@ -40,6 +40,32 @@ class Account extends \Model {
 		}
 		return '/apps/saasy/pix/profile.png';
 	}
+
+	/**
+	 * Save a new profile photo.
+	 */
+	public function save_photo ($upload) {
+		$ext = strtolower (pathinfo ($upload['name'], PATHINFO_EXTENSION));
+
+		if (! is_dir ('cache/saasy')) {
+			mkdir ('cache/saasy');
+			chmod ('cache/saasy', 0777);
+		}
+
+		if (! is_dir ('cache/saasy/accounts')) {
+			mkdir ('cache/saasy/accounts');
+			chmod ('cache/saasy/accounts', 0777);
+		}
+
+		if (! move_uploaded_file (
+			$upload['tmp_name'],
+			'cache/saasy/accounts/' . $this->id . '.' . $ext
+		)) {
+			return false;
+		}
+		chmod ('cache/saasy/accounts/' . $this->id . '.' . $ext, 0666);
+		return true;
+	}
 }
 
 ?>
