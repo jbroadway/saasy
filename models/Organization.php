@@ -22,6 +22,31 @@ class Organization extends \Model {
 	public $table = '#prefix#saasy_org';
 
 	/**
+	 * Model relations.
+	 * - $org->accounts() will return the associated Accounts
+	 */
+	public $fields = array (
+		'accounts' => array ('has_many' => '\saasy\Account', 'field_name' => 'org')
+	);
+
+	/**
+	 * List all members (merges account and user info).
+	 */
+	public function members () {
+		return \DB::fetch (
+			'select a.*, u.name, u.email
+			from #prefix#saasy_acct a, #prefix#user u
+			where
+				a.user = u.id
+			and
+				a.org = ?
+			order by
+				u.name asc',
+			$this->id
+		);
+	}
+
+	/**
 	 * The output for the header of the site.
 	 */
 	public static function header () {

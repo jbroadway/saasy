@@ -24,8 +24,8 @@ class Account extends \Model {
 	 * - $acct->org() will return the associated Organization
 	 */
 	public $fields = array (
-		'user' => array ('has_one' => '\User'),
-		'org' => array ('has_one' => '\saasy\Organization')
+		'user' => array ('has_one' => '\User', 'field_name' => 'id'),
+		'org' => array ('has_one' => '\saasy\Organization', 'field_name' => 'id')
 	);
 
 	/**

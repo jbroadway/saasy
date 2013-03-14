@@ -28,6 +28,11 @@ $form->data = array (
 	'org_logo' => $org->logo ()
 );
 
+// TODO: check limits too
+if ($acct->type === 'owner') {
+	$form->data['members'] = $org->members ();
+}
+
 $acct = App::acct ();
 if ($acct->type === 'owner') {
 	$form->view = 'saasy/account_owner';
