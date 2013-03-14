@@ -155,6 +155,56 @@ class API extends Restful {
 
 		return $orig;
 	}
+
+	/**
+	 * Enable a member account.
+	 *
+	 * Accessible at POST /saasy/api/member_enable
+	 *
+	 * Parameters:
+	 * - account - ID of account
+	 */
+	public function post_member_enable () {
+		if (! isset ($_POST['account'])) {
+			return $this->error (__ ('Parameter required: account'));
+		}
+		
+		$acct = new Account ($_POST['account']);
+		if ($acct->error) {
+			return $this->error (__ ('Account not found'));
+		}
+
+		if ($acct->org != App::org ()->id) {
+			return $this->error (__ ('Cannot update accounts from other organizations'));
+		}
+
+		return $acct->enable ();
+	}
+
+	/**
+	 * Disable a member account.
+	 *
+	 * Accessible at POST /saasy/api/member_disable
+	 *
+	 * Parameters:
+	 * - account - ID of account
+	 */
+	public function post_member_disable () {
+		if (! isset ($_POST['account'])) {
+			return $this->error (__ ('Parameter required: account'));
+		}
+		
+		$acct = new Account ($_POST['account']);
+		if ($acct->error) {
+			return $this->error (__ ('Account not found'));
+		}
+
+		if ($acct->org != App::org ()->id) {
+			return $this->error (__ ('Cannot update accounts from other organizations'));
+		}
+
+		return $acct->disable ();
+	}
 }
 
 ?>

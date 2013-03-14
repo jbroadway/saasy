@@ -33,6 +33,22 @@ class Account extends \Model {
 	}
 
 	/**
+	 * Enable this user account.
+	 */
+	public function enable () {
+		$this->enabled = 1;
+		return $this->put ();
+	}
+
+	/**
+	 * Disable this user account.
+	 */
+	public function disable () {
+		$this->enabled = 0;
+		return $this->put ();
+	}
+
+	/**
 	 * Returns a correctly sized profile photo if available.
 	 * If not, returns a default profile photo.
 	 */
