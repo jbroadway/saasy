@@ -75,7 +75,7 @@ layout:
 <?php
 
 // Prevent direct access to this handler
-if (! $this->internal) die;
+if (! saasy\App::authorize ($page, $tpl)) return;
 
 // Your handler logic goes here
 

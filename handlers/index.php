@@ -8,10 +8,7 @@
 namespace saasy;
 
 // Authorize user
-$res = App::authorize ($page, $tpl);
-if (! $res) {
-	return;
-}
+if (! App::authorize ($page, $tpl)) return;
 
 $section = isset ($this->params[0])
 	? $this->params[0]
