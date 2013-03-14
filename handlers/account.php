@@ -41,6 +41,7 @@ if ($acct->type === 'owner') {
 	$form->view = 'saasy/account_owner';
 	$form->rules = parse_ini_file ('apps/saasy/forms/account_owner.php', true);
 	$page->add_script ('/apps/saasy/js/bootstrap-filestyle-0.1.0.min.js');
+	$page->add_script ('/apps/saasy/js/account_members.js');
 }
 
 echo $form->handle (function ($form) use ($page, $org, $acct) {

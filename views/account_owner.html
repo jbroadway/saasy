@@ -1,3 +1,5 @@
+{! admin/util/modal !}
+
 <form method="post" id="{{_form}}" enctype="multipart/form-data">
 <div class="row">
 	<div class="span6">
@@ -87,9 +89,13 @@
 <ul id="members"></ul>
 
 <script>
-var members = {{ members|json_encode }},
-	member_limit = {{ member_limit }};
 $(function () {
 	$(':file').filestyle ();
+	$.account_members ({
+		list: '#members',
+		add_button: '#member-add',
+		data: {{ members|json_encode }},
+		limit: {{ member_limit }}
+	});
 });
 </script>
