@@ -3,22 +3,22 @@
 	<div class="span6">
 
 <p>
-	<label>{"Your name"}</label>
+	<label>{"Your name"} <span class="notice" id="name-notice">{"Required field"}</span></label>
 	<input type="text" name="name" value="{{ name|quotes }}" />
 </p>
 
 <p>
-	<label>{"Email address"}</label>
+	<label>{"Email address"} <span class="notice" id="email-notice">{"Required field"}</span></label>
 	<input type="email" name="email" value="{{ email|quotes }}" autocomplete="off" />
 </p>
 
 <p>
-	<label>{"New password"}</label>
+	<label>{"New password"} <span class="notice" id="new_pass-notice">{"Must be 6+ characters"}</span></label>
 	<input type="password" name="new_pass" value="{{ new_pass|quotes }}" autocomplete="off" />
 </p>
 
 <p>
-	<label>{"Verify password"}</label>
+	<label>{"Verify password"} <span class="notice" id="ver_pass-notice">{"Password does not match"}</span></label>
 	<input type="password" name="ver_pass" value="{{ ver_pass|quotes }}" autocomplete="off" />
 </p>
 
@@ -26,8 +26,9 @@
 	<div class="span6">
 
 <p>
-	<label>{"Profile photo (160x160)"}</label><br />
+	<label>{"Profile photo (160x160)"}{% if has_photo %} <a href="{{ App::href () }}/account/removephoto">{"Remove"}</a>{% end %}</label><br />
 	<img src="{{photo}}" width="160" height="160" style="padding-bottom: 5px" /><br />
+	<span class="notice" id="photo-notice">{"Must be JPG, PNG, or GIF"}<br /></span>
 	<input type="file" name="photo" />
 </p>
 

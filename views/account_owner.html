@@ -26,10 +26,10 @@
 	<div class="span6">
 
 <p>
-	<label>{"Profile photo (160x160)"}</label><br />
+	<label>{"Profile photo (160x160)"}{% if has_photo %} <a href="{{ saasy\App::href () }}/account/removephoto">{"Remove"}</a>{% end %}</label><br />
 	<img src="{{photo}}" width="160" height="160" style="padding-bottom: 5px" /><br />
+	<span class="notice" id="photo-notice">{"Must be JPG, PNG, or GIF"}<br /></span>
 	<input type="file" name="photo" />
-	<span class="notice" id="photo-notice"><br />{"Must be JPG, PNG, or GIF"}</span>
 </p>
 
 <p><br /><input type="submit" value="{"Update settings"}" /></p>
@@ -60,14 +60,14 @@
 	<div class="span6">
 
 <p>
-	<label>{"Organization logo (250x40)"}</label><br />
+	<label>{"Organization logo (250x40)"}{% if has_logo %} <a href="{{ saasy\App::href () }}/account/removelogo">{"Remove"}</a>{% end %}</label><br />
 	{% if org_logo %}
 	<img src="{{org_logo}}" width="250" height="40" style="padding-bottom: 5px" /><br />
 	{% else %}
 	<img src="/apps/saasy/pix/default.png" width="250" height="40" style="padding-bottom: 5px" /><br />
 	{% end %}
+	<span class="notice" id="photo-notice">{"Must be JPG, PNG, or GIF"}<br /></span>
 	<input type="file" name="org_logo" />
-	<span class="notice" id="photo-notice"><br />{"Must be JPG, PNG, or GIF"}</span>
 </p>
 
 <p><br /><input type="submit" value="{"Update settings"}" /></p>
@@ -79,14 +79,16 @@
 <hr />
 
 <p style="float: right; margin-top: 18px;">
-	<a href="{{ saasy\App::href () }}/account/add">{"Add a member"}</a>
+	<a href="#" id="member-add">{"Add a member"}</a>
 </p>
 
 <h2>{"Members"}</h2>
 
-<p>...</p>
+<ul id="members"></ul>
 
 <script>
+var members = {{ members|json_encode }},
+	member_limit = {{ member_limit }};
 $(function () {
 	$(':file').filestyle ();
 });

@@ -81,6 +81,21 @@ class Account extends \Model {
 		chmod ('cache/saasy/accounts/' . $this->id . '.' . $ext, 0666);
 		return true;
 	}
+
+	/**
+	 * Remove the profile photo.
+	 */
+	public function remove_photo () {
+		if (file_exists ('cache/saasy/accounts/' . $this->id . '.jpg')) {
+			unlink ('cache/saasy/accounts/' . $this->id . '.jpg');
+		}
+		if (file_exists ('cache/saasy/accounts/' . $this->id . '.png')) {
+			unlink ('cache/saasy/accounts/' . $this->id . '.png');
+		}
+		if (file_exists ('cache/saasy/accounts/' . $this->id . '.gif')) {
+			unlink ('cache/saasy/accounts/' . $this->id . '.gif');
+		}
+	}
 }
 
 ?>

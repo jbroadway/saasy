@@ -25,9 +25,15 @@ $form->data = array (
 	'org_logo' => $org->logo ()
 );
 
+$form->data['has_photo'] = ($form->data['photo'] === '/apps/saasy/pix/profile.png') ? false : true;
+$form->data['has_logo'] = ($form->data['org_logo']) ? true : false;
+
 // TODO: check limits too
 if ($acct->type === 'owner') {
+	$limits = App::limits ($org->level);
 	$form->data['members'] = $org->members ();
+	$form->data['member_limit'] = isset ($limits['members']) ? $limits['members'] : -1;
+	$form->data['account_level'] = isset ($limits['name']) ? $limits['name'] : false;
 }
 
 $acct = App::acct ();

@@ -123,6 +123,10 @@ class API extends Restful {
 			return $this->error (__ ('Account not found'));
 		}
 
+		if ($acct->org != App::org ()->id) {
+			return $this->error (__ ('Cannot remove accounts from other organizations'));
+		}
+
 		$u = $acct->user ();
 
 		$orig = array (

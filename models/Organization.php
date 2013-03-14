@@ -126,6 +126,21 @@ class Organization extends \Model {
 		chmod ('cache/saasy/logos/' . $this->id . '.' . $ext, 0666);
 		return true;
 	}
+
+	/**
+	 * Remove the account logo.
+	 */
+	public function remove_logo () {
+		if (file_exists ('cache/saasy/logos/' . $this->id . '.jpg')) {
+			unlink ('cache/saasy/logos/' . $this->id . '.jpg');
+		}
+		if (file_exists ('cache/saasy/logos/' . $this->id . '.png')) {
+			unlink ('cache/saasy/logos/' . $this->id . '.png');
+		}
+		if (file_exists ('cache/saasy/logos/' . $this->id . '.gif')) {
+			unlink ('cache/saasy/logos/' . $this->id . '.gif');
+		}
+	}
 }
 
 ?>
