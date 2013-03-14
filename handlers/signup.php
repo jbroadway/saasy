@@ -61,7 +61,7 @@ echo $form->handle (function ($form) use ($page, $tpl) {
 				))
 			));
 		} catch (Exception $e) {
-			@error_log ('Email failed (user/signup): ' . $u->error);
+			@error_log ('Email failed (saasy/signup): ' . $e->getMessage ());
 			$u->userdata = array ();
 			$u->put ();
 		}

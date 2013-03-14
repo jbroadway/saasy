@@ -8,8 +8,12 @@
 $this->require_admin ();
 
 $page->layout = 'admin';
-$page->title = 'SAASy';
+$page->title = 'SaaS Manager';
 
-printf ('<p>%s</p>', __ ('Not implemented yet.'));
+$orgs = saasy\Organization::query ()->count ();
+$accts = saasy\Account::query ()->where ('type != "owner"')->count ();
+
+printf ('<p>%s: %d</p>', __ ('Organizations'), $orgs);
+printf ('<p>%s: %d</p>', __ ('Member Accounts'), $accts);
 
 ?>

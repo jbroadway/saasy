@@ -1,9 +1,10 @@
-# SAASy
+# SAASy - SaaS Manager
 
-This [Elefant](http://www.elefantcms.com/) app provides the glue for building custom
-software-as-a-service (SAAS) apps. It provides the basic user account management,
-[Bootstrap](http://twitter.github.com/bootstrap/index.html) integration, and app
-structure, so you can focus on creating the custom functionality of your SAAS app.
+SAASy is an [Elefant](http://www.elefantcms.com/) app that provides the glue for
+building custom software-as-a-service (SaaS) apps. It provides the basic user
+account management, [Bootstrap](http://twitter.github.com/bootstrap/index.html)
+integration, and app structure, so you can focus on creating the custom functionality
+of your SaaS app.
 
 Status: Alpha
 
@@ -17,7 +18,7 @@ Status: Alpha
 4. Copy the included `saasy.html` into your `layouts` folder.
 5. In the global `conf/config.php` set the `default_handler` to `"saasy/index"`,
    and set the `default_layout` to `"saasy"`.
-6. Go to Tools > SAASy to install the database schema for organizations and accounts.
+6. Go to Tools > SaaS Manager to install the database schema for organizations and accounts.
 
 ## To do
 
@@ -32,10 +33,10 @@ Status: Alpha
 
 ## Future
 
-* Admin dashboard to show # of organizations and accounts
+* Admin dashboard to manage organizations and accounts
 * Drop menus in the navbar
 * Customizable theme colours
-* Billing management
+* Billing/subscription management
 
 ## Customization
 

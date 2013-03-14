@@ -19,14 +19,18 @@ class Account extends \Model {
 	public $table = '#prefix#saasy_acct';
 
 	/**
-	 * Model relations.
-	 * - $acct->user() will return the associated User
-	 * - $acct->org() will return the associated Organization
+	 * Return the associated user.
 	 */
-	public $fields = array (
-		'user' => array ('has_one' => '\User', 'field_name' => 'id'),
-		'org' => array ('has_one' => '\saasy\Organization', 'field_name' => 'id')
-	);
+	public function user () {
+		return new \User ($this->user);
+	}
+
+	/**
+	 * Return the associated organization.
+	 */
+	public function org () {
+		return new Organization ($this->org);
+	}
 
 	/**
 	 * Returns a correctly sized profile photo if available.

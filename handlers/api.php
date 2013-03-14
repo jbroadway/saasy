@@ -4,10 +4,8 @@
  * Loads the REST API for the member accounts.
  */
 
-$res = saasy\App::authorize ($page, $tpl);
-if (! $res) {
-	return;
-}
+// Authorize user
+if (! saasy\App::authorize ($page, $tpl)) return;
 
 $this->restful (new saasy\API);
 

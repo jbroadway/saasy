@@ -54,7 +54,7 @@ new_account = saasy/email/new_account
 [Admin]
 
 handler = saasy/admin
-name = SAASy
+name = SaaS Manager
 install = saasy/install
 upgrade = saasy/upgrade
 version = 0.9.0-beta

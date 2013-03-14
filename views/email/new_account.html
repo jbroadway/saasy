@@ -1,0 +1,20 @@
+Hi {{ name }},
+
+You have been added to the {{ org_name }} account. To log in, visit:
+
+http://{{ $_SERVER.HTTP_HOST }}/
+
+We have generated a random password for your to log in. You may change
+it on the Account page once you log in for the first time. Here are
+your login credentials:
+
+Email: {{ email }}
+
+Password: {{ pass }}
+
+
+If you have any questions just reply to let us know!
+
+Regards,
+
+{{ conf('General', 'site_name') }}
