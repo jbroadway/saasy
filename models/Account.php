@@ -36,7 +36,8 @@ class Account extends \Model {
 		$files = glob ('cache/saasy/accounts/' . $this->id . '.{jpg,png,gif}', GLOB_BRACE);
 		if (count ($files) > 0) {
 			$photo = array_shift ($files);
-			return '/' . \Image::resize ($photo, $width, $height, 'cover');
+			$ext = strtolower (pathinfo ($logo, PATHINFO_EXTENSION));
+			return '/' . \Image::resize ($photo, $width, $height, 'cover', $ext);
 		}
 		return '/apps/saasy/pix/profile.png';
 	}

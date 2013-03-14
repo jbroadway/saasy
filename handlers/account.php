@@ -57,6 +57,9 @@ echo $form->handle (function ($form) use ($page, $org, $acct) {
 		} else {
 			$domain_has_changed = false;
 		}
+		if (! $org->put ()) {
+			return false;
+		}
 
 		if (is_uploaded_file ($_FILES['org_logo']['tmp_name'])) {
 			$org->save_logo ($_FILES['org_logo']);

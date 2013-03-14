@@ -60,7 +60,8 @@ class Organization extends \Model {
 		$files = glob ('cache/saasy/logos/' . $this->id . '.{jpg,png,gif}', GLOB_BRACE);
 		if (count ($files) > 0) {
 			$logo = array_shift ($files);
-			return '/' . \Image::resize ($logo, $width, $height, 'cover');
+			$ext = strtolower (pathinfo ($logo, PATHINFO_EXTENSION));
+			return '/' . \Image::resize ($logo, $width, $height, 'cover', $ext);
 		}
 		return false;
 	}
