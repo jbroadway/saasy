@@ -11,22 +11,114 @@
 	self.tpl = null;
 
 	self.add_member_dialog = function () {
-		$.open_dialog (
-			'Add Member',
-			'<p>...</p>'
+		$('#add-member-name').val ('');
+		$('#add-member-email').val ('');
+		$('#add-member-name-notice').hide ();
+		$('#add-member-email-notice').hide ();
+		$('#add-member-email2-notice').hide ();
+		$('#add-member').modal ();
+	};
+
+	self.update_members = function () {
+		$.get (
+			'/saasy/api/members',
+			function (res) {
+				if (res.success) {
+					self.opts.data = res.data;
+				}
+				self.render_members ();
+			}
 		);
 	};
 
 	self.add_member = function () {
+		var name = $('#add-member-name').val (),
+			email = $('#add-member-email').val ();
+
+		if (name.length === 0) {
+			$('#add-member-name-notice').show ();
+			return false;
+		} else {
+			$('#add-member-name-notice').hide ();
+		}
+
+		if (email.length === 0) {
+			$('#add-member-email-notice').show ();
+			$('#add-member-email2-notice').hide ();
+			return false;
+		} else {
+			$('#add-member-email-notice').hide ();
+			$('#add-member-email2-notice').hide ();
+		}
+
+		$.post (
+			'/saasy/api/member_add',
+			{name: name, email: email},
+			function (res) {
+				if (! res.success) {
+					$('#add-member-email2-notice').show ();
+					return;
+				}
+				$('#add-member').modal ('hide');
+				self.update_members ();
+			}
+		);
+
+		return false;
 	};
 
 	self.remove_member = function () {
+		var account = $(this).data ('id');
+		
+		$.post (
+			'/saasy/api/member_remove',
+			{account: account},
+			function (res) {
+				if (! res.success) {
+					alert (res.error);
+					return;
+				}
+				self.update_members ();
+			}
+		);
+
+		return false;
 	};
 
 	self.disable_member = function () {
+		var account = $(this).data ('id');
+		
+		$.post (
+			'/saasy/api/member_disable',
+			{account: account},
+			function (res) {
+				if (! res.success) {
+					alert (res.error);
+					return;
+				}
+				self.update_members ();
+			}
+		);
+
+		return false;
 	};
 
 	self.enable_member = function () {
+		var account = $(this).data ('id');
+		
+		$.post (
+			'/saasy/api/member_enable',
+			{account: account},
+			function (res) {
+				if (! res.success) {
+					alert (res.error);
+					return;
+				}
+				self.update_members ();
+			}
+		);
+
+		return false;
 	};
 
 	self.render_members = function () {
@@ -56,6 +148,7 @@
 		self.list.on ('click', '.member-enable', {}, self.enable_member);
 		self.list.on ('click', '.member-remove', {}, self.remove_member);
 		$(self.opts.add_button).click (self.add_member_dialog);
+		$('#add-member-form').submit (self.add_member);
 
 		self.render_members ();
 	};

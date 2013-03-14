@@ -117,3 +117,29 @@ $(function () {
 	\{{/if}}
 </div>
 </script>
+
+<div id="add-member" class="modal">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">x</button>
+		<h3>{"Add Member"}</h3>
+	</div>
+	<div class="modal-body">
+		<form id="add-member-form">
+			<p>
+				<label>{"Member name"} <span class="notice" id="add-member-name-notice">{"Required field"}</span></label>
+				<input type="text" id="add-member-name" />
+			</p>
+			<p>
+				<label>
+					{"Email address"}
+					<span class="notice" id="add-member-email-notice">{"Required field"}</span>
+					<span class="notice" id="add-member-email2-notice">{"Email already in use"}</span>
+				</label>
+				<input type="email" id="add-member-email" />
+			</p>
+			<p>
+				<input type="submit" value="{"Add member"}" />
+			</p>
+		</form>
+	</div>
+</div>
