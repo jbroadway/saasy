@@ -33,7 +33,7 @@ class Organization extends \Model {
 	 * List all members (merges account and user info).
 	 */
 	public function members () {
-		return \DB::fetch (
+		$res = \DB::fetch (
 			'select a.*, u.name, u.email
 			from #prefix#saasy_acct a, #prefix#user u
 			where
@@ -44,6 +44,12 @@ class Organization extends \Model {
 				u.name asc',
 			$this->id
 		);
+		foreach ($res as $k => $row) {
+			$acct = new Account;
+			$acct->id = $row->id;
+			$res[$k]->photo = $acct->photo (100, 100);
+		}
+		return $res;
 	}
 
 	/**

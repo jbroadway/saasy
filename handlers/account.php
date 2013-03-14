@@ -40,7 +40,9 @@ $acct = App::acct ();
 if ($acct->type === 'owner') {
 	$form->view = 'saasy/account_owner';
 	$form->rules = parse_ini_file ('apps/saasy/forms/account_owner.php', true);
+	$page->add_style ('/apps/saasy/css/account_members.css');
 	$page->add_script ('/apps/saasy/js/bootstrap-filestyle-0.1.0.min.js');
+	$page->add_script ('/apps/admin/js/handlebars-1.0.rc.1.js');
 	$page->add_script ('/apps/saasy/js/account_members.js');
 }
 
