@@ -144,7 +144,7 @@ class App {
 		}
 
 		// Require user to be logged in
-		if (! \User::require_login ()) {
+		if (! \User::is_valid ()) {
 			$page->title = __ ('Members');
 			echo self::$controller->run ('user/login');
 			return false;
