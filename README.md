@@ -8,6 +8,10 @@ of your SaaS app.
 
 Status: Beta
 
+## Screenshot
+
+![Saasy Account management screen](https://raw.github.com/jbroadway/saasy/master/css/saasy-account.png)
+
 ## Installation
 
 1. Drop the app into your `apps` folder.
