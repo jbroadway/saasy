@@ -2,7 +2,7 @@
 
 namespace saasy;
 
-use DB, Mailer, Restful, User, Validator, Versions, View;
+use DB, Mailer, Notifier, Restful, User, Validator, Versions, View;
 
 /**
  * Restful API for the app.

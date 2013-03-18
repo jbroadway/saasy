@@ -77,17 +77,20 @@ echo $form->handle (function ($form) use ($page, $org, $acct) {
 		}
 
 		if ($domain_has_changed) {
-			$form->controller->redirect (
-				$form->controller->is_https ()
-					? 'https://' . $org->subdomain . '.' . App::base_domain () . '/'
-					: 'http://' . $org->subdomain . '.' . App::base_domain () . '/'
+			echo \View::render (
+				'saasy/account_redirect',
+				array (
+					'redirect' => $form->controller->is_https ()
+						? 'https://' . $org->subdomain . '.' . App::base_domain () . '/'
+						: 'http://' . $org->subdomain . '.' . App::base_domain () . '/'
+				)
 			);
+			return;
 		}
-
-		// TODO: add notification for user
-
-		$form->controller->redirect (App::href () . '/account');
 	}
+
+	\Notifier::add_notice (__ ('Your settings have been updated.'));
+	$form->controller->redirect (App::href () . '/account');
 });
 
 ?>

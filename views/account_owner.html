@@ -1,3 +1,5 @@
+{! admin/util/notifier !}
+
 <form method="post" id="{{_form}}" enctype="multipart/form-data">
 <div class="row">
 	<div class="span6">
@@ -109,11 +111,11 @@ $(function () {
 		{"Owner"}
 	\{{else}}
 		\{{#if enabled}}
-			<a href="#" data-id="\{{id}}" class="member-disable">{"Disable"}</a>
+			<a href="#" data-id="\{{id}}" data-name="\{{name}}" class="member-disable">{"Disable"}</a>
 		\{{else}}
-			<a href="#" data-id="\{{id}}" class="member-enable">{"Enable"}</a>
+			<a href="#" data-id="\{{id}}" data-name="\{{name}}" class="member-enable">{"Enable"}</a>
 		\{{/if}}
-		| <a href="#" data-id="\{{id}}" class="member-remove">{"Remove"}</a>
+		| <a href="#" data-id="\{{id}}" data-name="\{{name}}" class="member-remove">{"Remove"}</a>
 	\{{/if}}
 </div>
 </script>

@@ -1,6 +1,6 @@
-# SAASy - SaaS Manager
+# Saasy - SaaS Manager
 
-SAASy is an [Elefant](http://www.elefantcms.com/) app that provides the glue for
+Saasy is an [Elefant](http://www.elefantcms.com/) app that provides the glue for
 building custom software-as-a-service (SaaS) apps. It provides the basic user
 account management, [Bootstrap](http://twitter.github.com/bootstrap/index.html)
 integration, and app structure, so you can focus on creating the custom functionality
@@ -22,31 +22,24 @@ Status: Alpha
 
 ## To do
 
-* Account management
-  * Save changes
-  * Upload photos
-  * Add members
-  * Remove members
-  * Enable/disable members
 * Email templates for account management
 * Documentation/examples
 
 ## Future
 
 * Admin dashboard to manage organizations and accounts
-* Drop menus in the navbar
 * Customizable theme colours
 * Billing/subscription management
 
 ## Customization
 
-SAASy works by hooking your own app into its various settings. You should only need
-to edit the SAASy configuration in `conf/app.saasy.config.php`, but not any of the
-SAASy source files directly.
+Saasy works by hooking your own app into its various settings. You should only need
+to edit the Saasy configuration in `conf/app.saasy.config.php`, but not any of the
+Saasy source files directly.
 
 Instead, create a secondary app that will contain all of your models, view templates,
-and handlers, and point SAASy to them via the above config file. Here's an example
-folder structure for a typical SAASy setup:
+and handlers, and point Saasy to them via the above config file. Here's an example
+folder structure for a typical Saasy setup:
 
 ```
 apps/
@@ -106,7 +99,7 @@ $page->add_style ('/apps/myapp/css/custom.css');
 ```
 
 Next, create the file `apps/myapp/css/custom.css` with any custom stylings you want.
-Note that SAASy uses Bootstrap for its layout, so you can refer to their website for
+Note that Saasy uses Bootstrap for its layout, so you can refer to their website for
 class and element names for styling.
 
 And finally, edit the config and set the `theme` to point to our new handler like this:
@@ -119,7 +112,7 @@ theme = myapp/theme
 
 Since we're not accessing our custom app directly, and we don't want all of our URLs
 to begin with `/saasy/`, we can set the `app_alias` setting to another name of our
-choosing, and SAASy will automatically alias that to point to our app. So if we want
+choosing, and Saasy will automatically alias that to point to our app. So if we want
 to access our SAAS app at the URL `/myapp`, then we would set `app_alias` like this:
 
 ```

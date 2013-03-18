@@ -60,6 +60,7 @@
 					return;
 				}
 				$('#add-member').modal ('hide');
+				$.add_notice ('Member added: ' + name);
 				self.update_members ();
 			}
 		);
@@ -68,7 +69,12 @@
 	};
 
 	self.remove_member = function () {
-		var account = $(this).data ('id');
+		var account = $(this).data ('id'),
+			name = $(this).data ('name');
+
+		if (! confirm ('Are you sure you want to remove this member?')) {
+			return false;
+		}
 		
 		$.post (
 			'/saasy/api/member_remove',
@@ -78,6 +84,7 @@
 					alert (res.error);
 					return;
 				}
+				$.add_notice ('Member removed: ' + name);
 				self.update_members ();
 			}
 		);
@@ -86,7 +93,8 @@
 	};
 
 	self.disable_member = function () {
-		var account = $(this).data ('id');
+		var account = $(this).data ('id'),
+			name = $(this).data ('name');
 		
 		$.post (
 			'/saasy/api/member_disable',
@@ -96,6 +104,7 @@
 					alert (res.error);
 					return;
 				}
+				$.add_notice ('Member disabled: ' + name);
 				self.update_members ();
 			}
 		);
@@ -104,7 +113,8 @@
 	};
 
 	self.enable_member = function () {
-		var account = $(this).data ('id');
+		var account = $(this).data ('id'),
+			name = $(this).data ('name');
 		
 		$.post (
 			'/saasy/api/member_enable',
@@ -114,6 +124,7 @@
 					alert (res.error);
 					return;
 				}
+				$.add_notice ('Member enabled: ' + name);
 				self.update_members ();
 			}
 		);
@@ -127,6 +138,7 @@
 		$(self.opts.data).each (function () {
 			// add to list
 			this.is_owner = (this.type === 'owner') ? true : false;
+			this.enabled = parseInt (this.enabled);
 			self.list.append (self.tpl (this));
 		});
 	};
