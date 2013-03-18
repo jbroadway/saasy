@@ -64,9 +64,9 @@ layouts/
 	saasy.html (copied from apps/saasy/saasy.html)
 ```
 
-### Adding sections to your SAAS app
+### Adding sections to your SaaS app
 
-To add a new section to your SAAS app, create a handler in your app with the following
+To add a new section to your SaaS app, create a handler in your app with the following
 layout:
 
 ```php
@@ -80,14 +80,14 @@ if (! saasy\App::authorize ($page, $tpl)) return;
 ?>
 ```
 
-If your handler's name is `myapp/reports`, to include this in your SAAS menu, add the
+If your handler's name is `myapp/reports`, to include this in your SaaS menu, add the
 following line to `apps/saasy/conf/config.php`'s `[Sections]` section:
 
 ```
 reports[myapp/reports] = Reports
 ```
 
-This will now appear as "Reports" in your SAAS app menu.
+This will now appear as "Reports" in your SaaS app menu.
 
 ### Adding a custom theme
 
@@ -112,12 +112,12 @@ And finally, edit the config and set the `theme` to point to our new handler lik
 theme = myapp/theme
 ```
 
-### Setting the SAAS app's base URL
+### Setting the SaaS app's base URL
 
 Since we're not accessing our custom app directly, and we don't want all of our URLs
 to begin with `/saasy/`, we can set the `app_alias` setting to another name of our
 choosing, and Saasy will automatically alias that to point to our app. So if we want
-to access our SAAS app at the URL `/myapp`, then we would set `app_alias` like this:
+to access our SaaS app at the URL `/myapp`, then we would set `app_alias` like this:
 
 ```
 app_alias = myapp
