@@ -6,7 +6,7 @@ account management, [Bootstrap](http://twitter.github.com/bootstrap/index.html)
 integration, and app structure, so you can focus on creating the custom functionality
 of your SaaS app.
 
-Status: Alpha
+Status: Beta
 
 ## Installation
 
@@ -22,7 +22,7 @@ Status: Alpha
 
 ## To do
 
-* Email templates for account management
+* Enforce account limits
 * Documentation/examples
 
 ## Future
