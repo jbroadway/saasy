@@ -40,6 +40,12 @@ limits = Off
 ; For example:
 ;
 ; clients[myapp/clients] = Clients
+;
+; Dropdown menus can also be added like this:
+;
+; dropdown:options[] = Options
+; dropdown:options[myapp/option1] = Option A
+; dropdown:options[myapp/option2] = Option B
 
 [Emails]
 

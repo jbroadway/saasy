@@ -179,6 +179,20 @@ class App {
 	}
 
 	/**
+	 * Take a handler name and turn it into a URL that will map
+	 * correctly to a Saasy-enabled handler by rewriting the
+	 * app name portion of the handler to the [App Settings]
+	 * app_alias value.
+	 */
+	public static function make_href ($handler) {
+		$conf = self::conf ();
+		if (strpos ($handler, $conf['App Settings']['app_alias'] . '/') === 0) {
+			return '/' . $handler;
+		}
+		return '/' . preg_replace ('/^[^\/]+\//', $conf['App Settings']['app_alias'] . '/', $handler);
+	}
+
+	/**
 	 * Fetch the footer menu for your app.
 	 */
 	public static function footer () {
@@ -256,6 +270,26 @@ class App {
 
 		$out = '<ul class="nav">';
 		foreach ($conf['Sections'] as $key => $value) {
+			if (strpos ($key, 'dropdown:') === 0) {
+				// handle dropdown menu options
+				$key = str_replace ('dropdown:', '', $key);
+				$label = array_shift ($value);
+				$out .= '<li class="dropdown">'
+					. '<a href="#" class="dropdown-toggle" data-toggle="dropdown">'
+					. $label . ' <b class="caret"></b></a>'
+					. '<ul class="dropdown-menu">';
+				foreach ($value as $handler => $label) {
+					$out .= sprintf (
+						'<li><a href="%s">%s</a></li>',
+						self::make_href ($handler),
+						$label
+					);
+				}
+				$out .= '</ul></li>';
+				continue;
+			}
+
+			// handle regular menu options
 			$class = ($current && $current === $key)
 				? ' class="active"'
 				: '';
