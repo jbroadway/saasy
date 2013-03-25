@@ -163,6 +163,30 @@ class App {
 	}
 
 	/**
+	 * Authorize the user to see the account, or return false
+	 * to allow the handler to return a REST error response.
+	 */
+	public static function authorize_restful () {
+		$org = self::org ();
+		if (! $org) {
+			return false;
+		}
+
+		// Require user to be logged in
+		if (! \User::is_valid ()) {
+			return false;
+		}
+
+		// Does this user belong to the organization?
+		$acct = self::acct ();
+		if (! $acct || $acct->org !== $org->id || $acct->enabled == 0) {
+			return false;
+		}
+		
+		return true;
+	}
+
+	/**
 	 * Get the app name.
 	 */
 	public static function name () {
