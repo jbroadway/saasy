@@ -26,7 +26,7 @@ Status: **Beta**
 
 ## To do
 
-* Documentation/examples
+* More documentation/examples
 * Billing/subscription management
 * Admin dashboard to manage customers and accounts
 * Customizable theme colours
