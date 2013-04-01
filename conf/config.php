@@ -2,9 +2,9 @@
 
 [App Settings]
 
-; The name of your SAAS service.
+; The name of your SaaS service.
 
-app_name = My SAAS App
+app_name = My SaaS App
 
 ; The URL to map to your app (e.g., 'myapp' if you want
 ; your app accessible at the URL /myapp).
