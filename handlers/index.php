@@ -2,7 +2,7 @@
 
 /**
  * Loads the custom handlers for each section, and provides
- * access control between organizations.
+ * access control between customers.
  */
 
 namespace saasy;

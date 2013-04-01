@@ -17,7 +17,7 @@ length = "6+"
 
 matches = "$_POST['password']"
 
-[org_name]
+[customer_name]
 
 not empty = 1
 
@@ -26,6 +26,6 @@ not empty = 1
 not empty = 1
 not equals = "www"
 regex = "/^[a-z0-9-]+$/"
-unique = "#prefix#saasy_org.subdomain"
+unique = "#prefix#saasy_customer.subdomain"
 
 ; */ ?>

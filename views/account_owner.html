@@ -45,8 +45,8 @@
 	<div class="span6">
 
 <p>
-	<label>{"Organization name"} <span class="notice" id="org_name-notice">{"Required field"}</span></label>
-	<input type="text" name="org_name" value="{{ org_name|quotes }}" />
+	<label>{"Company name"} <span class="notice" id="customer_name-notice">{"Required field"}</span></label>
+	<input type="text" name="customer_name" value="{{ customer_name|quotes }}" />
 </p>
 
 <p>
@@ -62,14 +62,14 @@
 	<div class="span6">
 
 <p>
-	<label>{"Organization logo (250x40)"}{% if has_logo %} <a href="{{ saasy\App::href () }}/account/removelogo">{"Remove"}</a>{% end %}</label><br />
-	{% if org_logo %}
-	<img src="{{org_logo}}" width="250" height="40" style="padding-bottom: 5px" /><br />
+	<label>{"Company logo (250x40)"}{% if has_logo %} <a href="{{ saasy\App::href () }}/account/removelogo">{"Remove"}</a>{% end %}</label><br />
+	{% if customer_logo %}
+	<img src="{{customer_logo}}" width="250" height="40" style="padding-bottom: 5px" /><br />
 	{% else %}
 	<img src="/apps/saasy/pix/default.png" width="250" height="40" style="padding-bottom: 5px" /><br />
 	{% end %}
 	<span class="notice" id="photo-notice">{"Must be JPG, PNG, or GIF"}<br /></span>
-	<input type="file" name="org_logo" />
+	<input type="file" name="customer_logo" />
 </p>
 
 <p><br /><input type="submit" value="{"Update settings"}" /></p>

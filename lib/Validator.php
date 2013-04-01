@@ -19,13 +19,13 @@ class Validator {
 	}
 
 	/**
-	 * Make sure subdomain is unique except for current org.
+	 * Make sure subdomain is unique except for current customer.
 	 */
 	public static function subdomain ($subdomain) {
-		$org = App::org ();
+		$customer = App::customer ();
 		$res = \DB::shift (
-			'select count() from #prefix#saasy_org where id != ? and subdomain = ?',
-			$org->id,
+			'select count() from #prefix#saasy_customer where id != ? and subdomain = ?',
+			$customer->id,
 			$subdomain
 		);
 		if ($res > 0) {

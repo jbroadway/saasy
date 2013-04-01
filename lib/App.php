@@ -17,9 +17,9 @@ class App {
 	public static $controller = null;
 
 	/**
-	 * The current organization.
+	 * The current customer.
 	 */
-	public static $org = null;
+	public static $customer = null;
 
 	/**
 	 * The current user account.
@@ -71,22 +71,22 @@ class App {
 		$page->add_script ('/apps/saasy/bootstrap/js/bootstrap.min.js');
 		$page->add_script ('<script>$(function(){$("input[type=submit]").addClass("btn");});</script>');	
 
-		// Get the org from the subdomain
+		// Get the customer from the subdomain
 		$parts = explode ('.', $_SERVER['HTTP_HOST']);
 		if (count ($parts) === 3) {
 			$sub = array_shift ($parts);
-			$org = Organization::query ()
+			$customer = Customer::query ()
 				->where ('subdomain', $sub)
 				->single ();
 
-			if ($org && ! $org->error) {
-				self::org ($org);
+			if ($customer && ! $customer->error) {
+				self::customer ($customer);
 
 				// Get the account from the user
 				if (\User::require_login ()) {
 					$acct = Account::query ()
 						->where ('user', \User::val ('id'))
-						->where ('org', $org->id)
+						->where ('customer', $customer->id)
 						->single ();
 
 					if ($acct && ! $acct->error) {
@@ -109,13 +109,13 @@ class App {
 	}
 
 	/**
-	 * Get/set the current organization.
+	 * Get/set the current customer.
 	 */
-	public static function org ($org = null) {
-		if ($org !== null) {
-			self::$org = $org;
+	public static function customer ($customer = null) {
+		if ($customer !== null) {
+			self::$customer = $customer;
 		}
-		return self::$org;
+		return self::$customer;
 	}
 
 	/**
@@ -133,9 +133,9 @@ class App {
 	 * appropriate action if they're not authorized.
 	 */
 	public static function authorize ($page, $tpl) {
-		// Send non-org requests to the main site signup
-		$org = self::org ();
-		if (! $org) {
+		// Send non-customer requests to the main site signup
+		$customer = self::customer ();
+		if (! $customer) {
 			self::$controller->redirect (
 				self::$controller->is_https ()
 					? 'https://www.' . self::base_domain () . '/user/signup'
@@ -150,9 +150,9 @@ class App {
 			return false;
 		}
 
-		// Does this user belong to the organization?
+		// Does this user belong to the company?
 		$acct = self::acct ();
-		if (! $acct || $acct->org !== $org->id || $acct->enabled == 0) {
+		if (! $acct || $acct->customer !== $customer->id || $acct->enabled == 0) {
 			\User::logout ();
 			$page->title = __ ('Unauthorized');
 			echo $tpl->render ('saasy/unauthorized');
@@ -167,8 +167,8 @@ class App {
 	 * to allow the handler to return a REST error response.
 	 */
 	public static function authorize_restful () {
-		$org = self::org ();
-		if (! $org) {
+		$customer = self::customer ();
+		if (! $customer) {
 			return false;
 		}
 
@@ -177,9 +177,9 @@ class App {
 			return false;
 		}
 
-		// Does this user belong to the organization?
+		// Does this user belong to the company?
 		$acct = self::acct ();
-		if (! $acct || $acct->org !== $org->id || $acct->enabled == 0) {
+		if (! $acct || $acct->customer !== $customer->id || $acct->enabled == 0) {
 			return false;
 		}
 		

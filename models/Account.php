@@ -9,11 +9,11 @@ namespace saasy;
  *
  * - id - Auto-incrementing ID for each account row
  * - user - User ID, ref to \User
- * - org - Organization ID, ref to saasy\Organization
+ * - customer - Customer ID, ref to saasy\Customer
  * - type - 'owner' or 'member' (expandable)
  * - enabled - 0 = no, 1 = yes
  *
- * Indexed by user and org. User/org combo must be unique.
+ * Indexed by user and customer. User/customer combo must be unique.
  */
 class Account extends \Model {
 	public $table = '#prefix#saasy_acct';
@@ -26,10 +26,10 @@ class Account extends \Model {
 	}
 
 	/**
-	 * Return the associated organization.
+	 * Return the associated customer.
 	 */
-	public function org () {
-		return new Organization ($this->org);
+	public function customer () {
+		return new Customer ($this->customer);
 	}
 
 	/**

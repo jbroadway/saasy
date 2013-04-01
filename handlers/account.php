@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Provides organization and account management.
+ * Provides customer and account management.
  */
 
 namespace saasy;
@@ -13,25 +13,25 @@ $page->title = __ ('Account');
 
 $form = new \Form ('post', $this);
 
-$org = App::org ();
+$customer = App::customer ();
 $acct = App::acct ();
 
 $form->data = array (
 	'name' => \User::val ('name'),
 	'email' => \User::val ('email'),
 	'photo' => $acct->photo (),
-	'org_name' => $org->name,
-	'subdomain' => $org->subdomain,
-	'org_logo' => $org->logo ()
+	'customer_name' => $customer->name,
+	'subdomain' => $customer->subdomain,
+	'customer_logo' => $customer->logo ()
 );
 
 $form->data['has_photo'] = ($form->data['photo'] === '/apps/saasy/pix/profile.png') ? false : true;
-$form->data['has_logo'] = ($form->data['org_logo']) ? true : false;
+$form->data['has_logo'] = ($form->data['customer_logo']) ? true : false;
 
 // TODO: check limits too
 if ($acct->type === 'owner') {
-	$limits = App::limits ($org->level);
-	$form->data['members'] = $org->members ();
+	$limits = App::limits ($customer->level);
+	$form->data['members'] = $customer->members ();
 	$form->data['member_limit'] = isset ($limits['members']) ? $limits['members'] : -1;
 	$form->data['account_level'] = isset ($limits['name']) ? $limits['name'] : false;
 }
@@ -46,7 +46,7 @@ if ($acct->type === 'owner') {
 	$page->add_script ('/apps/saasy/js/account_members.js');
 }
 
-echo $form->handle (function ($form) use ($page, $org, $acct) {
+echo $form->handle (function ($form) use ($page, $customer, $acct) {
 	// update user/acct
 	\User::val ('name', $_POST['name']);
 	\User::val ('email', $_POST['email']);
@@ -60,20 +60,20 @@ echo $form->handle (function ($form) use ($page, $org, $acct) {
 	}
 	
 	if ($acct->type === 'owner') {
-		// update org too
-		$org->name = $_POST['org_name'];
-		if ($org->subdomain !== $_POST['subdomain']) {
-			$org->subdomain = $_POST['subdomain'];
+		// update customer too
+		$customer->name = $_POST['customer_name'];
+		if ($customer->subdomain !== $_POST['subdomain']) {
+			$customer->subdomain = $_POST['subdomain'];
 			$domain_has_changed = true;
 		} else {
 			$domain_has_changed = false;
 		}
-		if (! $org->put ()) {
+		if (! $customer->put ()) {
 			return false;
 		}
 
-		if (is_uploaded_file ($_FILES['org_logo']['tmp_name'])) {
-			$org->save_logo ($_FILES['org_logo']);
+		if (is_uploaded_file ($_FILES['customer_logo']['tmp_name'])) {
+			$customer->save_logo ($_FILES['customer_logo']);
 		}
 
 		if ($domain_has_changed) {
@@ -81,8 +81,8 @@ echo $form->handle (function ($form) use ($page, $org, $acct) {
 				'saasy/account_redirect',
 				array (
 					'redirect' => $form->controller->is_https ()
-						? 'https://' . $org->subdomain . '.' . App::base_domain () . '/'
-						: 'http://' . $org->subdomain . '.' . App::base_domain () . '/'
+						? 'https://' . $customer->subdomain . '.' . App::base_domain () . '/'
+						: 'http://' . $customer->subdomain . '.' . App::base_domain () . '/'
 				)
 			);
 			return;

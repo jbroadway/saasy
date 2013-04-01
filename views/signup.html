@@ -15,9 +15,9 @@
 <hr />
 
 <p>
-	{"Organization name"}:<br />
-	<input type="text" name="org_name" id="org-name" size="40" value="{{ org_name }}" />
-	<span class="notice" id="org_name-notice">{"You must enter your organization name."}</span>
+	{"Company name"}:<br />
+	<input type="text" name="customer_name" id="customer-name" size="40" value="{{ customer_name }}" />
+	<span class="notice" id="customer_name-notice">{"You must enter your company name."}</span>
 </p>
 
 <p>
@@ -26,7 +26,7 @@
 		<input type="text" name="subdomain" id="subdomain" value="{{ subdomain }}" />
 		<span class="add-on">.{{ saasy\App::base_domain () }}</span>
 	</div>
-	<span class="notice" id="subdomain-notice">{"Please choose a unique domain for your organization."}</span>
+	<span class="notice" id="subdomain-notice">{"Please choose a unique domain for your company."}</span>
 </p>
 
 <p><input type="submit" value="{"Sign Up"}" /></p>
@@ -47,7 +47,7 @@ $(function () {
 		sub.val (val);
 	}
 
-	$('#org-name')
+	$('#customer-name')
 		.keyup (update_subdomain)
 		.blur (update_subdomain);
 });

@@ -9,16 +9,16 @@ use DB, Mailer, Notifier, Restful, User, Validator, Versions, View;
  */
 class API extends Restful {
 	/**
-	 * Get a list of members for an organization.
+	 * Get a list of members for a company.
 	 *
 	 * Accessible at GET /saasy/api/members
 	 */
 	public function get_members () {
-		return App::org ()->members ();
+		return App::customer ()->members ();
 	}
 	
 	/**
-	 * Add a new member to the current organization.
+	 * Add a new member to the current company.
 	 *
 	 * Accessible at POST /saasy/api/member_add
 	 *
@@ -64,11 +64,11 @@ class API extends Restful {
 
 		Versions::add ($u);
 
-		$org = App::org ();
+		$customer = App::customer ();
 
 		$acct = new Account (array (
 			'user' => $u->id,
-			'org' => $org->id,
+			'customer' => $customer->id,
 			'type' => 'member',
 			'enabled' => 1
 		));
@@ -82,12 +82,12 @@ class API extends Restful {
 		try {
 			Mailer::send (array (
 				'to' => array ($_POST['email'], $_POST['name']),
-				'subject' => __ ('You have been added to %s', $org->name),
+				'subject' => __ ('You have been added to %s', $customer->name),
 				'text' => View::render ('saasy/email/new_account', array (
 					'email' => $_POST['email'],
 					'name' => $_POST['name'],
 					'pass' => $pass,
-					'org_name' => $org->name
+					'customer_name' => $customer->name
 				))
 			));
 		} catch (Exception $e) {
@@ -97,7 +97,7 @@ class API extends Restful {
 		return array (
 			'id' => $acct->id,
 			'user' => $u->id,
-			'org' => $org->id,
+			'customer' => $customer->id,
 			'type' => $acct->type,
 			'enabled' => $acct->enabled,
 			'name' => $u->name,
@@ -106,7 +106,7 @@ class API extends Restful {
 	}
 
 	/**
-	 * Remove a member from an organization.
+	 * Remove a member from a company.
 	 *
 	 * Accessible at POST /saasy/api/member_remove
 	 *
@@ -123,8 +123,8 @@ class API extends Restful {
 			return $this->error (__ ('Account not found'));
 		}
 
-		if ($acct->org != App::org ()->id) {
-			return $this->error (__ ('Cannot remove accounts from other organizations'));
+		if ($acct->customer != App::customer ()->id) {
+			return $this->error (__ ('Cannot remove accounts from other companies'));
 		}
 
 		$u = $acct->user ();
@@ -132,7 +132,7 @@ class API extends Restful {
 		$orig = array (
 			'id' => $acct->id,
 			'user' => $u->id,
-			'org' => $acct->org,
+			'customer' => $acct->customer,
 			'type' => $acct->type,
 			'enabled' => $acct->enabled,
 			'name' => $u->name,
@@ -174,8 +174,8 @@ class API extends Restful {
 			return $this->error (__ ('Account not found'));
 		}
 
-		if ($acct->org != App::org ()->id) {
-			return $this->error (__ ('Cannot update accounts from other organizations'));
+		if ($acct->customer != App::customer ()->id) {
+			return $this->error (__ ('Cannot update accounts from other companies'));
 		}
 
 		return $acct->enable ();
@@ -199,8 +199,8 @@ class API extends Restful {
 			return $this->error (__ ('Account not found'));
 		}
 
-		if ($acct->org != App::org ()->id) {
-			return $this->error (__ ('Cannot update accounts from other organizations'));
+		if ($acct->customer != App::customer ()->id) {
+			return $this->error (__ ('Cannot update accounts from other companies'));
 		}
 
 		return $acct->disable ();

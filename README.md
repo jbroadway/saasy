@@ -1,12 +1,12 @@
 # Saasy - SaaS Manager
 
 Saasy is an [Elefant](http://www.elefantcms.com/) app that provides the glue for
-building custom software-as-a-service (SaaS) apps. It provides the basic user
-account management, [Bootstrap](http://twitter.github.com/bootstrap/index.html)
+building custom software-as-a-service (SaaS) apps. It provides the basic customer
+and account management, [Bootstrap](http://twitter.github.com/bootstrap/index.html)
 integration, and app structure, so you can focus on creating the custom functionality
 of your SaaS app.
 
-Status: Beta
+Status: **Beta**
 
 ## Screenshot
 
@@ -22,18 +22,15 @@ Status: Beta
 4. Copy the included `saasy.html` into your `layouts` folder.
 5. In the global `conf/config.php` set the `default_handler` to `"saasy/index"`,
    and set the `default_layout` to `"saasy"`.
-6. Go to Tools > SaaS Manager to install the database schema for organizations and accounts.
+6. Go to Tools > SaaS Manager to install the database schema for customers and accounts.
 
 ## To do
 
-* Enforce account limits
+* Enforce customer account limits
 * Documentation/examples
-
-## Future
-
-* Admin dashboard to manage organizations and accounts
-* Customizable theme colours
 * Billing/subscription management
+* Admin dashboard to manage customers and accounts
+* Customizable theme colours
 
 ## Customization
 
@@ -122,3 +119,21 @@ to access our SaaS app at the URL `/myapp`, then we would set `app_alias` like t
 ```
 app_alias = myapp
 ```
+
+### Getting the current customer ID
+
+To keep the data from one customer separate from the others, you will need to add
+a customer field to your models to store the customer ID. The customer ID is an
+integer value, which you can get from your custom app via:
+
+```php
+<?php
+
+$customer_id = \saasy\App::customer()->id;
+
+// do something with $customer_id
+
+?>
+```
+
+You can also get the customer object itself just by calling `\saasy\App::customer()`.

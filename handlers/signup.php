@@ -2,12 +2,12 @@
 
 /**
  * Custom user sign up form that also creates an initial
- * organziation and owner account.
+ * customer and owner account.
  */
 
 // Sign up at base domain
-$org = saasy\App::org ();
-if ($org) {
+$customer = saasy\App::customer ();
+if ($customer) {
 	$this->redirect (
 		$this->is_https ()
 			? 'https://www.' . saasy\App::base_domain () . '/user/signup'
@@ -34,17 +34,17 @@ echo $form->handle (function ($form) use ($page, $tpl) {
 	$u->put ();
 	Versions::add ($u);
 	if (! $u->error) {
-		// Create organization and account
-		$org = new saasy\Organization (array (
-			'name' => $_POST['org_name'],
+		// Create customer and account
+		$customer = new saasy\Customer (array (
+			'name' => $_POST['customer_name'],
 			'subdomain' => $_POST['subdomain'],
 			'level' => 1
 		));
-		$org->put ();
+		$customer->put ();
 
 		$acct = new saasy\Account (array (
 			'user' => $u->id,
-			'org' => $org->id,
+			'customer' => $customer->id,
 			'type' => 'owner',
 			'enabled' => 1
 		));
@@ -70,8 +70,8 @@ echo $form->handle (function ($form) use ($page, $tpl) {
 		User::require_login ();
 		$form->controller->redirect (
 			$form->controller->is_https ()
-				? 'https://' . $org->domain () . '/'
-				: 'http://' . $org->domain () . '/'
+				? 'https://' . $customer->domain () . '/'
+				: 'http://' . $customer->domain () . '/'
 		);
 	}
 	@error_log ('Error creating profile: ' . $u->error);

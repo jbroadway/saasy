@@ -2,7 +2,7 @@
 
 [App Settings]
 
-; The name of your SAAS app.
+; The name of your SAAS service.
 
 app_name = My SAAS App
 
@@ -49,11 +49,11 @@ limits = Off
 
 [Emails]
 
-; The welcome email for new organizations
+; The welcome email for new customers
 
 welcome = saasy/email/welcome
 
-; The welcome email for new accounts within an organization
+; The welcome email for new accounts within a company
 
 new_account = saasy/email/new_account
 

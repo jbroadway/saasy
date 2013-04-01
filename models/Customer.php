@@ -3,30 +3,30 @@
 namespace saasy;
 
 /**
- * Contains the logic around managing organizations.
+ * Contains the logic around managing customers.
  *
  * Fields:
  *
- * - id - Auto-incrementing ID for each organzation row
- * - name - Organization name
- * - subdomain - Subdomain to link to this organization
- * - level - Account level of the organization
+ * - id - Auto-incrementing ID for each customer row
+ * - name - Customer name
+ * - subdomain - Subdomain to link to this customer
+ * - level - Account level of the customer
  *
  * Subdomains must be unique, and cannot be 'www'.
  *
- * Level may be used to enable/disable features for an organization
+ * Level may be used to enable/disable features for a customer
  * through the 'limits' setting. Note that level=0 implies a disabled
  * account.
  */
-class Organization extends \Model {
-	public $table = '#prefix#saasy_org';
+class Customer extends \Model {
+	public $table = '#prefix#saasy_customer';
 
 	/**
 	 * Model relations.
-	 * - $org->accounts() will return the associated Accounts
+	 * - $customer->accounts() will return the associated Accounts
 	 */
 	public $fields = array (
-		'accounts' => array ('has_many' => '\saasy\Account', 'field_name' => 'org')
+		'accounts' => array ('has_many' => '\saasy\Account', 'field_name' => 'customer')
 	);
 
 	/**
@@ -39,7 +39,7 @@ class Organization extends \Model {
 			where
 				a.user = u.id
 			and
-				a.org = ?
+				a.customer = ?
 			order by
 				u.name asc',
 			$this->id
@@ -56,25 +56,25 @@ class Organization extends \Model {
 	 * The output for the header of the site.
 	 */
 	public static function header () {
-		$org = App::org ();
-		if (! $org) {
+		$company = App::customer ();
+		if (! $company) {
 			return App::name ();
 		}
 
-		$logo = $org->logo ();
+		$logo = $company->logo ();
 
 		if ($logo !== false) {
 			return sprintf (
 				'<img src="%s" title="%s" />',
 				$logo,
-				$org->name
+				$company->name
 			);
 		}
-		return $org->name;
+		return $company->name;
 	}
 
 	/**
-	 * Get the full domain for the current organzation.
+	 * Get the full domain for the current customer.
 	 */
 	public function domain () {
 		$parts = explode ('.', $_SERVER['HTTP_HOST']);

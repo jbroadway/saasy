@@ -18,7 +18,7 @@ length = "6+"
 
 matches = "$_POST['new_pass']"
 
-[org_name]
+[customer_name]
 
 not empty = 1
 
@@ -35,7 +35,7 @@ skip_if_empty = 1
 file = 1
 filetype = "jpg, png, gif"
 
-[org_logo]
+[customer_logo]
 
 skip_if_empty = 1
 file = 1
