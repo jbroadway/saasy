@@ -85,6 +85,9 @@ Tasks, Files, and a Wiki, you would say:
 This will create a preconfigured `conf/app.saasy.config.php`, and the outline of your
 app including models, schema, handlers, and views.
 
+> Note the need for the backslash before the space in the title. This is necessary due
+to a quirk in the way parameters are received in a PHP script.
+
 ### Adding sections to your SaaS app
 
 To add a new section to your SaaS app, create a handler in your app with the following
