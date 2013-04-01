@@ -79,14 +79,11 @@ For example, to create a basic app called "Project Spot" with navbar options for
 Tasks, Files, and a Wiki, you would say:
 
 ```
-./elefant saasy/app projectspot "Project\ Spot" Messages Tasks Files Wiki
+./elefant saasy/app projectspot "Project Spot" Messages Tasks Files Wiki
 ```
 
 This will create a preconfigured `conf/app.saasy.config.php`, and the outline of your
 app including models, schema, handlers, and views.
-
-> Note the need for the backslash before the space in the title. This is necessary due
-to a quirk in the way parameters are received in a PHP script.
 
 ### Adding sections to your SaaS app
 
