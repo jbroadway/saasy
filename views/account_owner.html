@@ -78,6 +78,8 @@
 </div>
 </form>
 
+{% if member_limit !== 0 %}
+
 <hr />
 
 <p style="float: right; margin-top: 18px;">
@@ -145,3 +147,15 @@ $(function () {
 		</form>
 	</div>
 </div>
+
+<div id="limit-reached" class="modal">
+	<div class="modal-body">
+		<p>
+			{"You have reached the maximum members for your account."}<br />
+			<a href="{{ saasy\App::href () }}/account/plans">{"Upgrade to add more members."}</a>
+		</p>
+		<input type="submit" data-dismiss="modal" value="{"Close"}" />
+	</div>
+</div>
+
+{% end %}

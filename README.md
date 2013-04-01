@@ -26,7 +26,6 @@ Status: **Beta**
 
 ## To do
 
-* Enforce customer account limits
 * Documentation/examples
 * Billing/subscription management
 * Admin dashboard to manage customers and accounts
@@ -161,3 +160,71 @@ $customer_id = \saasy\App::customer()->id;
 ```
 
 You can also get the customer object itself just by calling `\saasy\App::customer()`.
+
+### Enforcing account limits
+
+Saasy looks to your app to define what account limits, if any, are needed. This is done
+by pointing the `limits` setting in your `conf/app.saasy.config.php` file to a method
+call defined in your app. For example:
+
+```
+limits = "myapp\Account::limits"
+```
+
+This would correspond with a class in the file `apps/myapp/lib/Account.php` that looks
+like this:
+
+```php
+<?php
+
+namespace myapp;
+
+class Account {
+	/**
+	 * Returns a list of account limits.
+	 */
+	public static function limits () {
+		return array (
+			1 => array (
+				'name' => __ ('Basic'),
+				'members' => 0 // no sub-accounts
+			),
+			2 => array (
+				'name' => __ ('Standard'),
+				'members' => 5 // up to 5 member accounts
+			),
+			3 => array (
+				'name' => __ ('Pro'),
+				'members' => -1 // unlimited members
+			)
+		);
+	}
+}
+
+?>
+```
+
+Notice that the array keys explicitly start from `1`, which is because `0` means a
+disabled account.
+
+The `members` value is used in the Account area to enforce member account limits.
+Additional custom limits can be added here too.
+
+From here, you can get the limits for a given customer like this:
+
+```php
+<?php
+
+// get the current customer object
+$customer = saasy\App::customer ();
+
+// get all limits for the current account level
+$limits = saasy\App::limits ($customer->level);
+
+// get a specific limit value, with default to -1 if not set
+$member_limit = saasy\App::limit ($customer->level, 'members', -1);
+
+?>
+```
+
+As you can see, these methods make it easy to integrate limits into your SaaS app.

@@ -3,6 +3,6 @@
 	margin-bottom: 10px;
 }
 
-#add-member {
+#add-member, #limit-reached {
 	display: none;
 }

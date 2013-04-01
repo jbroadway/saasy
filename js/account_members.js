@@ -10,13 +10,30 @@
 	
 	self.tpl = null;
 
+	self.limit_reached = function () {
+		if (self.opts.limit === -1) {
+			return false;
+		} else if (self.opts.limit === 0) {
+			return true;
+		}
+		if (self.opts.limit > self.opts.data.length) {
+			return false;
+		}
+		return true;
+	};
+
 	self.add_member_dialog = function () {
+		if (self.limit_reached ()) {
+			$('#limit-reached').modal ();
+			return false;
+		}
 		$('#add-member-name').val ('');
 		$('#add-member-email').val ('');
 		$('#add-member-name-notice').hide ();
 		$('#add-member-email-notice').hide ();
 		$('#add-member-email2-notice').hide ();
 		$('#add-member').modal ();
+		return false;
 	};
 
 	self.update_members = function () {

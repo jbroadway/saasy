@@ -15,6 +15,7 @@ $form = new \Form ('post', $this);
 
 $customer = App::customer ();
 $acct = App::acct ();
+$limits = App::limits ($customer->level);
 
 $form->data = array (
 	'name' => \User::val ('name'),
@@ -28,16 +29,11 @@ $form->data = array (
 $form->data['has_photo'] = ($form->data['photo'] === '/apps/saasy/pix/profile.png') ? false : true;
 $form->data['has_logo'] = ($form->data['customer_logo']) ? true : false;
 
-// TODO: check limits too
 if ($acct->type === 'owner') {
-	$limits = App::limits ($customer->level);
 	$form->data['members'] = $customer->members ();
-	$form->data['member_limit'] = isset ($limits['members']) ? $limits['members'] : -1;
+	$form->data['member_limit'] = isset ($limits['members']) ? (int) $limits['members'] : -1;
 	$form->data['account_level'] = isset ($limits['name']) ? $limits['name'] : false;
-}
 
-$acct = App::acct ();
-if ($acct->type === 'owner') {
 	$form->view = 'saasy/account_owner';
 	$form->rules = parse_ini_file ('apps/saasy/forms/account_owner.php', true);
 	$page->add_style ('/apps/saasy/css/account_members.css');
