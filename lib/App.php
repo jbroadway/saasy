@@ -401,6 +401,18 @@ class App {
 		}
 		return self::$limits;
 	}
+
+	/**
+	 * Get a specific account limit value, with a default value
+	 * you can set if no limit is found. For example:
+	 *
+	 *     $customer = saasy\App::customer ();
+	 *     $member_limit = saasy\App::limit ($customer->level, 'members', -1);
+	 */
+	public static function limit ($level, $key, $default = -1) {
+		$limits = self::limits ($level);
+		return isset ($limits[$key]) ? $limits[$key] : $default;
+	}
 }
 
 ?>
