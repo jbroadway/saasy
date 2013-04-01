@@ -61,6 +61,30 @@ layouts/
 	saasy.html (copied from apps/saasy/saasy.html)
 ```
 
+### Using the app scaffold generator
+
+Saasy adds a command to the Elefant command line tool that you can use to automatically
+generate the basic scaffolding and configuration file for an app. Here is the format
+the command expects:
+
+```
+./elefant saasy/app <appname> <title> [<section>, <section>]
+```
+
+* `<appname>` is the name of the folder for your app
+* `<title>` is the title of your SaaS app
+* `<section>` is a list of navbar tabs for your app
+
+For example, to create a basic app called "Project Spot" with navbar options for Messages,
+Tasks, Files, and a Wiki, you would say:
+
+```
+./elefant saasy/app projectspot "Project\ Spot" Messages Tasks Files Wiki
+```
+
+This will create a preconfigured `conf/app.saasy.config.php`, and the outline of your
+app including models, schema, handlers, and views.
+
 ### Adding sections to your SaaS app
 
 To add a new section to your SaaS app, create a handler in your app with the following

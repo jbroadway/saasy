@@ -1,0 +1,21 @@
+<<?php /* */ ?>?php
+
+// Authorize user
+if (! saasy\App::authorize ($page, $tpl)) return;
+
+$customer_id = saasy\App::customer ()->id;
+$q = {{full_model}}::query ()->where ('customer', $customer);
+$t = {{full_model}}::query ()->where ('customer', $customer);
+
+${{handler}} = $q->fetch_orig (20, 0);
+$total = $t->count ();
+
+echo $tpl->render (
+	'{{appname}}/{{handler}}',
+	array (
+		'{{handler}}' => ${{handler}},
+		'total' => $total
+	)
+);
+
+?>

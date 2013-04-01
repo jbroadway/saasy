@@ -1,0 +1,15 @@
+<<?php /* */ ?>?php
+
+namespace {{appname}};
+
+use Model;
+
+class {{model}} extends Model {
+	public $table = '{{table}}';
+	
+	public $fields = array (
+		'customer' => array ('belongs_to' => 'saasy\Customer', 'field_name' => 'customer')
+	);
+}
+
+?>
