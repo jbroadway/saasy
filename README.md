@@ -132,6 +132,9 @@ And finally, edit the config and set the `theme` to point to our new handler lik
 theme = myapp/theme
 ```
 
+This was done as a handler so that you can include any number of initializations for
+your app's needs.
+
 ### Setting the SaaS app's base URL
 
 Since we're not accessing our custom app directly, and we don't want all of our URLs
