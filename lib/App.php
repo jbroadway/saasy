@@ -133,13 +133,15 @@ class App {
 	 * appropriate action if they're not authorized.
 	 */
 	public static function authorize ($page, $tpl) {
+		$conf = self::conf ();
+		$www = ($conf['App Settings']['include_www']) ? "www." : "";
 		// Send non-customer requests to the main site signup
 		$customer = self::customer ();
 		if (! $customer) {
 			self::$controller->redirect (
 				self::$controller->is_https ()
-					? 'https://' . self::base_domain () . '/user/signup'
-					: 'http://' . self::base_domain () . '/user/signup'
+					? 'https://' . $www . self::base_domain () . '/user/login'
+					: 'http://' . $www . self::base_domain () . '/user/login'
 			);
 		}
 
