@@ -69,7 +69,7 @@ class App {
 		// Add bootstrap.js
 		$page = $controller->page ();
 		$page->add_script ('/apps/saasy/bootstrap/js/bootstrap.min.js');
-		$page->add_script ('<script>$(function(){$("input[type=submit]").addClass("btn");});</script>');	
+		$page->add_script ('<script>$(function(){$("input[type=submit]").addClass("btn");});</script>');
 
 		// Get the customer from the subdomain
 		$parts = explode ('.', $_SERVER['HTTP_HOST']);
@@ -138,8 +138,8 @@ class App {
 		if (! $customer) {
 			self::$controller->redirect (
 				self::$controller->is_https ()
-					? 'https://www.' . self::base_domain () . '/user/signup'
-					: 'http://www.' . self::base_domain () . '/user/signup'
+					? 'https://' . self::base_domain () . '/user/signup'
+					: 'http://' . self::base_domain () . '/user/signup'
 			);
 		}
 
@@ -182,7 +182,7 @@ class App {
 		if (! $acct || $acct->customer !== $customer->id || $acct->enabled == 0) {
 			return false;
 		}
-		
+
 		return true;
 	}
 
@@ -356,7 +356,7 @@ class App {
 		if (! is_array ($conf['Sections'])) {
 			return '';
 		}
-		
+
 		$keys = array_keys ($conf['Sections']);
 		return array_shift ($keys);
 	}

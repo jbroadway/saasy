@@ -10,8 +10,8 @@ $customer = saasy\App::customer ();
 if ($customer) {
 	$this->redirect (
 		$this->is_https ()
-			? 'https://www.' . saasy\App::base_domain () . '/user/signup'
-			: 'http://www.' . saasy\App::base_domain () . '/user/signup'
+			? 'https://' . saasy\App::base_domain () . '/user/signup'
+			: 'http://' . saasy\App::base_domain () . '/user/signup'
 	);
 }
 
