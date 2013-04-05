@@ -69,7 +69,7 @@ class App {
 		// Add bootstrap.js
 		$page = $controller->page ();
 		$page->add_script ('/apps/saasy/bootstrap/js/bootstrap.min.js');
-		$page->add_script ('<script>$(function(){$("input[type=submit]").addClass("btn");});</script>');	
+		$page->add_script ('<script>$(function(){$("input[type=submit]").addClass("btn");});</script>');
 
 		// Get the customer from the subdomain
 		$parts = explode ('.', $_SERVER['HTTP_HOST']);
@@ -133,13 +133,15 @@ class App {
 	 * appropriate action if they're not authorized.
 	 */
 	public static function authorize ($page, $tpl) {
+		$conf = self::conf ();
+		$www = ($conf['App Settings']['include_www']) ? "www." : "";
 		// Send non-customer requests to the main site signup
 		$customer = self::customer ();
 		if (! $customer) {
 			self::$controller->redirect (
 				self::$controller->is_https ()
-					? 'https://www.' . self::base_domain () . '/user/signup'
-					: 'http://www.' . self::base_domain () . '/user/signup'
+					? 'https://' . $www . self::base_domain () . '/user/login'
+					: 'http://' . $www . self::base_domain () . '/user/login'
 			);
 		}
 
@@ -182,7 +184,7 @@ class App {
 		if (! $acct || $acct->customer !== $customer->id || $acct->enabled == 0) {
 			return false;
 		}
-		
+
 		return true;
 	}
 
@@ -356,7 +358,7 @@ class App {
 		if (! is_array ($conf['Sections'])) {
 			return '';
 		}
-		
+
 		$keys = array_keys ($conf['Sections']);
 		return array_shift ($keys);
 	}

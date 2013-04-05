@@ -4,14 +4,16 @@
  * Custom user sign up form that also creates an initial
  * customer and owner account.
  */
+$conf = saasy\App::conf ();
+$www = ($conf['App Settings']['include_www']) ? "www." : "";
 
 // Sign up at base domain
 $customer = saasy\App::customer ();
 if ($customer) {
 	$this->redirect (
 		$this->is_https ()
-			? 'https://www.' . saasy\App::base_domain () . '/user/signup'
-			: 'http://www.' . saasy\App::base_domain () . '/user/signup'
+			? 'https://' . $www . saasy\App::base_domain () . '/user/login'
+			: 'http://' . $www . saasy\App::base_domain () . '/user/login'
 	);
 }
 
