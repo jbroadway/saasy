@@ -17,12 +17,14 @@ Status: **Beta**
 1. Drop the app into your `apps` folder.
 2. Copy the file `apps/saasy/conf/config.php` to `conf/app.saasy.config.php` and
    edit the settings there. This is where most of your customization will occur.
-3. Copy the included `sample_bootstrap.php` into the root of your website and
+3. Copy the file `apps/saasy/conf/user_config.php` to `conf/app.user.config.php`
+   to link the user signup, update, and profile screens to Saasy's handlers.
+4. Copy the included `sample_bootstrap.php` into the root of your website and
    rename it `bootstrap.php`.
-4. Copy the included `saasy.html` into your `layouts` folder.
-5. In the global `conf/config.php` set the `default_handler` to `"saasy/index"`,
+5. Copy the included `saasy.html` into your `layouts` folder.
+6. In the global `conf/config.php` set the `default_handler` to `"saasy/index"`,
    and set the `default_layout` to `"saasy"`.
-6. Go to Tools > SaaS Manager to install the database schema for customers and accounts.
+7. Go to Tools > SaaS Manager to install the database schema for customers and accounts.
 
 ## To do
 
