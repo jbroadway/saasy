@@ -75,6 +75,7 @@ $conf = preg_replace ('/app_name = .*/', 'app_name = "' . $title . '"', $conf);
 $conf = preg_replace ('/app_alias = .*/', 'app_alias = ' . $appname, $conf);
 $section_block = '';
 $schema = '';
+$sqlite = '';
 foreach ($sections as $section) {
 	$section_block .= sprintf (
 		"%s[%s/%s] = %s\n",
@@ -102,10 +103,12 @@ foreach ($sections as $section) {
 	);
 
 	$schema .= $tpl->render ('saasy/app/table', $section);
+	$sqlite .= $tpl->render ('saasy/app/sqlite', $section);
 }
 $conf = str_replace ('[Emails]', $section_block . "\n[Emails]", $conf);
 file_put_contents ('conf/app.saasy.config.php', $conf);
 file_put_contents ('apps/' . $appname . '/conf/install_mysql.sql', $schema);
+file_put_contents ('apps/' . $appname . '/conf/install_sqlite.sql', $sqlite);
 
 echo "App created in apps/$appname, config created in conf/app.saasy.config.php\n";
 

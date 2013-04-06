@@ -1,0 +1,9 @@
+-- for {{full_model}} model
+create table {{table}} (
+	id integer primary key,
+	customer int not null
+	-- add your fields
+);
+
+create index {{table}}_customer on {{table}} (customer);
+
