@@ -26,6 +26,10 @@ Status: **Beta**
    and set the `default_layout` to `"saasy"`.
 7. Go to Tools > SaaS Manager to install the database schema for customers and accounts.
 
+**Note:** It's also a good idea to change the `session_domain` setting to `top` in the
+global `conf/config.php`. This will ensure logins work across subdomains, so a login to
+`www.example.com` also works on `mysubdomain.example.com`.
+
 ## To do
 
 * More documentation/examples
