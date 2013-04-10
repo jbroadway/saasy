@@ -5,5 +5,6 @@
 user/index = saasy/user
 user/signup = saasy/signup
 user/update = saasy/user
+user/login = saasy/login
 
 ; */ ?>
