@@ -110,6 +110,12 @@ file_put_contents ('conf/app.saasy.config.php', $conf);
 file_put_contents ('apps/' . $appname . '/conf/install_mysql.sql', $schema);
 file_put_contents ('apps/' . $appname . '/conf/install_sqlite.sql', $sqlite);
 
+$dbinfo = conf ('Database', 'master');
+$driver = $dbinfo['driver'];
+
 echo "App created in apps/$appname, config created in conf/app.saasy.config.php\n";
+echo "Your database schemas is in apps/$appname/conf/install_$driver.sql\n";
+echo "Edit this file to add your custom fields, then run:\n";
+echo "    ./elefant import-db apps/$appname/conf/install_$driver.sql\n";
 
 ?>

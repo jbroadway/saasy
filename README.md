@@ -86,6 +86,16 @@ Tasks, Files, and a Wiki, you would say:
 This will create a preconfigured `conf/app.saasy.config.php`, and the outline of your
 app including models, schema, handlers, and views.
 
+From here, you'll need to edit your database schema, found in `apps/<appname>/conf/`,
+then import it via:
+
+```
+./elefant import-db apps/<appname>/conf/install_mysql.sql
+```
+
+Make sure to change the appname and the schema file according to the database your site
+is using.
+
 ### Adding sections to your SaaS app
 
 To add a new section to your SaaS app, create a handler in your app with the following
