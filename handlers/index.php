@@ -14,6 +14,12 @@ $section = isset ($this->params[0])
 	? $this->params[0]
 	: false;
 
+// Redirect to internal handler if specified
+if (in_array ($section, array ('account', 'api', 'login', 'search', 'signup', 'user'))) {
+	echo $this->run ('saasy/' . $section);
+	return;
+}
+
 if (! $section) {
 	$this->redirect (App::href () . '/' . App::first_section ());
 }
