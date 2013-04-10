@@ -14,7 +14,7 @@ app_alias = myapp
 ; Use 'www' instead of a subdomain when a customer is
 ; not logged in
 
-include_www = Off
+include_www = On
 
 ; A custom handler that generates your custom footer
 ; navigation links.
