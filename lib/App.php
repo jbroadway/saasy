@@ -140,8 +140,8 @@ class App {
 		if (! $customer) {
 			self::$controller->redirect (
 				self::$controller->is_https ()
-					? 'https://' . $www . self::base_domain () . '/user/login'
-					: 'http://' . $www . self::base_domain () . '/user/login'
+					? 'https://' . $www . self::base_domain () . '/user/signup'
+					: 'http://' . $www . self::base_domain () . '/user/signup'
 			);
 		}
 
