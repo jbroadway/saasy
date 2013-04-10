@@ -56,10 +56,11 @@ echo $form->handle (function ($form) use ($page, $tpl) {
 			Mailer::send (array (
 				'to' => array ($_POST['email'], $_POST['name']),
 				'subject' => __ ('Please confirm your email address'),
-				'text' => $tpl->render ('user/email/verification', array (
+				'text' => $tpl->render ('saasy/email/verification', array (
 					'verifier' => $verifier,
 					'email' => $_POST['email'],
-					'name' => $_POST['name']
+					'name' => $_POST['name'],
+					'domain' => $customer->domain ()
 				))
 			));
 		} catch (Exception $e) {
