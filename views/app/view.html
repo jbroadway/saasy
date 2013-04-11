@@ -1,7 +1,11 @@
-<p>\{{total}} \{"{{handler}}"}:</p>
+\{% if total > 0 %}
+	<p>\{{total}} \{"{{handler}}"}:</p>
 
-<ul>
-\{% foreach {{handler}} as item %}
-	<li>\{"Item"} \{{ item->id }}</li>
+	<ul>
+	\{% foreach {{handler}} as item %}
+		<li>\{"Item"} \{{ item->id }}</li>
+	\{% end %}
+	</ul>
+\{% else %}
+	<p>\{" No results. "}</p>
 \{% end %}
-</ul>

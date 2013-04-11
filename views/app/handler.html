@@ -8,6 +8,7 @@ $q = {{full_model}}::query ()->where ('customer', $customer);
 $t = {{full_model}}::query ()->where ('customer', $customer);
 
 ${{handler}} = $q->fetch_orig (20, 0);
+${{handler}} = is_array (${{handler}}) ? ${{handler}} : array ();
 $total = $t->count ();
 
 echo $tpl->render (
