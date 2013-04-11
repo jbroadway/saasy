@@ -135,14 +135,18 @@ class App {
 	public static function authorize ($page, $tpl) {
 		$conf = self::conf ();
 		$www = ($conf['App Settings']['include_www']) ? "www." : "";
-		// Send non-customer requests to the main site signup
+		// Send non-customer requests to the main site
 		$customer = self::customer ();
 		if (! $customer) {
-			self::$controller->redirect (
-				self::$controller->is_https ()
-					? 'https://' . $www . self::base_domain () . '/user/signup'
-					: 'http://' . $www . self::base_domain () . '/user/signup'
-			);
+			if (strpos ($_SERVER['REQUEST_URI'], '/saasy/') === 0) {
+				self::$controller->redirect ('/');
+			}
+
+			$url = ($_SERVER['REQUEST_URI'] === '/')
+				? 'admin/page'
+				: 'admin/page' . $_SERVER['REQUEST_URI'];
+			echo self::$controller->run ($url);
+			return false;
 		}
 
 		// Require user to be logged in
