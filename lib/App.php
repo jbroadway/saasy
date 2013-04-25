@@ -257,6 +257,18 @@ class App {
 	}
 
 	/**
+	 * Whether the app's search has autocomplete capabilities.
+	 */
+	public static function has_search_autocomplete () {
+		if (! \User::require_login ()) {
+			return false;
+		}
+
+		$conf = self::$conf;
+		return ($conf['App Settings']['search_autocomplete']) ? true : false;
+	}
+
+	/**
 	 * Add search to your app.
 	 */
 	public static function search () {
@@ -279,6 +291,36 @@ class App {
 			);
 		}
 		return '';
+	}
+
+	/**
+	 * Get the account limits for all or a specific level.
+	 * Calls the method in [App Settings][limit] for a list
+	 * of limits, which should return an array such as:
+	 *
+	 *     array (
+	 *         1 => array (
+	 *             'name' => __ ('Free'),
+	 *             'members' => 0 // no sub-accounts
+	 *         ),
+	 *         2 => array (
+	 *             'name' => __ ('Basic'),
+	 *             'members' => 10 // 10 sub-accounts
+	 *         ),
+	 *         3 => array (
+	 *             'name' => __ ('Pro'),
+	 *             'members' => -1 // unlimited sub-accounts
+	 *         )
+	 *     );
+	 *
+	 * Note: Level 0 implies a disabled account.
+	 */
+	public static function search_autocomplete () {
+		$conf = self::$conf;
+		if (! $conf['App Settings']['search_autocomplete']) {
+			return array ();
+		}
+		return call_user_func ($conf['App Settings']['search_autocomplete']);
 	}
 
 	/**

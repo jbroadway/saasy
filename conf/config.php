@@ -31,6 +31,12 @@ theme = Off
 
 search = Off
 
+; An URL to call for autocomplete data for the search
+; typeahead function. This URL should provide a JSON
+; response with an array of strings.
+
+search_autocomplete = Off
+
 ; A static method to call for a list of access limits
 ; for each account level.
 

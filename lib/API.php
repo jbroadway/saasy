@@ -205,6 +205,15 @@ class API extends Restful {
 
 		return $acct->disable ();
 	}
+
+	/**
+	 * Autocomplete strings for search.
+	 *
+	 * Accessible at GET /saasy/api/autocomplete
+	 */
+	public function get_autocomplete () {
+		return App::search_autocomplete ();
+	}
 }
 
 ?>
