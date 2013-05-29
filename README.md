@@ -23,7 +23,7 @@ Status: **Beta**
    rename it `bootstrap.php`.
 5. Copy the included `saasy.html` into your `layouts` folder.
 6. In the global `conf/config.php` set the `default_handler` to `"saasy/index"`,
-   and set the `default_layout` to `"saasy"`.
+   set the `default_layout` to `"saasy"`, and set `session_domain = top`.
 7. Go to Tools > SaaS Manager to install the database schema for customers and accounts.
 
 **Note:** It's also a good idea to change the `session_domain` setting to `top` in the
