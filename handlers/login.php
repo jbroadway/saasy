@@ -26,6 +26,19 @@ if (! User::require_login ()) {
 	$_POST['signup_handler'] = false;
 	echo $tpl->render ('user/login', $_POST);
 } else {
+	$customer = saasy\App::customer ();
+	if (! $customer) {
+		$acct = saasy\Account::query ()
+			->where ('user', User::val ('id'))
+			->single ();
+
+		if ($acct && ! $acct->error) {
+			$customer = new saasy\Customer ($acct->customer);
+			if (! $customer->error) {
+				$this->redirect ('//' . $customer->domain () . '/');
+			}
+		}
+	}
 	$this->redirect ($_POST['redirect']);
 }
 

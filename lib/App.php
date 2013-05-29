@@ -375,6 +375,11 @@ class App {
 			return '';
 		}
 
+		$customer = self::customer ();
+		if (! $customer) {
+			return '';
+		}
+
 		$conf = self::$conf;
 		if (! is_array ($conf['Sections'])) {
 			$conf['Sections'] = array ();
