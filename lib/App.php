@@ -77,9 +77,8 @@ class App {
 		$page->add_script ('<script>$(function(){$("input[type=submit]").addClass("btn");});</script>');
 
 		// Get the customer from the subdomain
-		$parts = explode ('.', $_SERVER['HTTP_HOST']);
-		if (count ($parts) === 3) {
-			$sub = array_shift ($parts);
+		$sub = self::subdomain ();
+		if ($sub) {
 			/** @var $customer Customer */
 			$customer = Customer::query ()
 				->where ('subdomain', $sub)
@@ -110,11 +109,26 @@ class App {
 	 * @return string
 	 */
 	public static function base_domain () {
+		$base = \Appconf::saasy ('App Settings', 'base_domain');
+		if ($base) return $base;
+
 		$parts = explode ('.', $_SERVER['HTTP_HOST']);
 		if (count ($parts) === 3) {
 			array_shift ($parts);
 		}
 		return join ('.', $parts);
+	}
+
+	/**
+	 * Get the subdomain of the current customer, if any.
+	 * Returns false if the subdomain is `www`.
+	 */
+	public static function subdomain () {
+		$base = self::base_domain ();
+		if (preg_match ('/^([a-zA-Z0-9-]+)\.' . preg_quote ($base) . '$/', $_SERVER['HTTP_HOST'], $regs)) {
+			return ($regs[1] !== 'www') ? $regs[1] : false;
+		}
+		return false;
 	}
 
 	/**
