@@ -40,6 +40,8 @@ if ($acct->type === 'owner') {
 	$page->add_script ('/apps/saasy/js/bootstrap-filestyle-0.1.0.min.js');
 	$page->add_script ('/apps/admin/js/handlebars-1.0.rc.1.js');
 	$page->add_script ('/apps/saasy/js/account_members.js');
+} else {
+	$page->add_script ('/apps/saasy/js/bootstrap-filestyle-0.1.0.min.js');
 }
 
 echo $form->handle (function ($form) use ($page, $customer, $acct) {

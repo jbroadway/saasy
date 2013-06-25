@@ -26,7 +26,7 @@
 	<div class="span6">
 
 <p>
-	<label>{"Profile photo (160x160)"}{% if has_photo %} <a href="{{ App::href () }}/account/removephoto">{"Remove"}</a>{% end %}</label><br />
+	<label>{"Profile photo (160x160)"}{% if has_photo %} <a href="{{ saasy\App::href () }}/account/removephoto">{"Remove"}</a>{% end %}</label><br />
 	<img src="{{photo}}" width="160" height="160" style="padding-bottom: 5px" /><br />
 	<span class="notice" id="photo-notice">{"Must be JPG, PNG, or GIF"}<br /></span>
 	<input type="file" name="photo" />
@@ -37,3 +37,11 @@
 	</div>
 </div>
 </form>
+
+<script>
+$(function () {
+	{% if ! detect ('msie') %}
+	$(':file').filestyle ();
+	{% end %}
+});
+</script>

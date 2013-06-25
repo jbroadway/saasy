@@ -94,7 +94,9 @@
 
 <script>
 $(function () {
+	{% if ! detect ('msie') %}
 	$(':file').filestyle ();
+	{% end %}
 	$.account_members ({
 		list: '#members',
 		add_button: '#member-add',
