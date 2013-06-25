@@ -12,9 +12,13 @@ app_name = My SaaS App
 app_alias = myapp
 
 ; Use 'www' instead of a subdomain when a customer is
-; not logged in
+; not logged in.
 
 include_www = On
+
+; Set the base domain of the site here (e.g., 'myapp.com').
+
+base_domain = Off
 
 ; A custom handler that generates your custom footer
 ; navigation links.

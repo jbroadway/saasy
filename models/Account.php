@@ -14,6 +14,12 @@ namespace saasy;
  * - enabled - 0 = no, 1 = yes
  *
  * Indexed by user and customer. User/customer combo must be unique.
+ *
+ * @property int id
+ * @property int   enabled
+ * @property \User user
+ * @property Customer customer
+ * @property string{"owner","member"} type
  */
 class Account extends \Model {
 	public $table = '#prefix#saasy_acct';
@@ -56,7 +62,7 @@ class Account extends \Model {
 		$files = glob ('cache/saasy/accounts/' . $this->id . '.{jpg,png,gif}', GLOB_BRACE);
 		if (count ($files) > 0) {
 			$photo = array_shift ($files);
-			$ext = strtolower (pathinfo ($logo, PATHINFO_EXTENSION));
+			$ext = strtolower (pathinfo ($photo, PATHINFO_EXTENSION));
 			return '/' . \Image::resize ($photo, $width, $height, 'cover', $ext);
 		}
 		return '/apps/saasy/pix/profile.png';
